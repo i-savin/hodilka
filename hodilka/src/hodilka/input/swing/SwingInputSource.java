@@ -4,12 +4,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import hodilka.input.InputSource;
-import hodilka.input.UserInput;
+import hodilka.input.PlayerInput;
 
 public class SwingInputSource implements InputSource, KeyListener {
 
-	private static final UserInput emptyInput = new UserInput();
-	private UserInput ui;
+	private static final PlayerInput emptyInput = new PlayerInput();
+	private PlayerInput ui;
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -18,7 +18,7 @@ public class SwingInputSource implements InputSource, KeyListener {
 
 	@Override
 	public synchronized void keyPressed(KeyEvent e) {
-		ui = new UserInput(e.getKeyCode(), e.getModifiers());
+		ui = new PlayerInput(e.getKeyCode(), e.getModifiers());
 		notify();
 		//System.out.println(e);
 	}
@@ -29,9 +29,9 @@ public class SwingInputSource implements InputSource, KeyListener {
 	}
 
 	@Override
-	public synchronized UserInput getInput() {
+	public synchronized PlayerInput getInput() {
 		if (ui != null) {
-			UserInput tmp = ui;
+			PlayerInput tmp = ui;
 			ui = null;
 			return tmp;
 		} else {

@@ -15,7 +15,7 @@ public class Test {
 		Model model = modelGenerator.createModel();
 		
 		InputOutputEngie s = new InputOutputEngie(model);
-		s.render();
+		s.getOutputSystem().render();
 		
 	}
 

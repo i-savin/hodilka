@@ -1,18 +1,18 @@
 package hodilka.input;
 
-public class UserInput {
+public class PlayerInput {
 
 	private final boolean empty;
 	private final int keyCode;
 	private final int modifiers;
 
-	public UserInput() {
+	public PlayerInput() {
 		this.empty = true;
 		this.keyCode = 0;
 		this.modifiers = 0;
 	}
 
-	public UserInput(int keyCode, int modifiers) {
+	public PlayerInput(int keyCode, int modifiers) {
 		this.empty = false;
 		this.keyCode = keyCode;
 		this.modifiers = modifiers;

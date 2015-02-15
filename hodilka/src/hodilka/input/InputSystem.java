@@ -9,12 +9,13 @@ public class InputSystem {
 		this.inputSource = inputSource;
 	}
 
-	public UserInput getUserInputNoWait() {
+	public PlayerInput getUserInputNoWait() {
 		return inputSource.getInput();
 	}
 	
-	public UserInput getUserInputWithWait() {
-		UserInput ui = inputSource.getInput();
+	/** Stops the thread until player pushes a keyboard button */
+	public PlayerInput getUserInputWithWait() {
+		PlayerInput ui = inputSource.getInput();
 		if (ui.isEmpty()) {
 			synchronized (inputSource) {
 				try {
