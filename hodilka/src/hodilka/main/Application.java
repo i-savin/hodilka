@@ -31,13 +31,15 @@ public class Application {
 		OutputSystem output = ioEngie.getOutputSystem();
 		InputSystem input = ioEngie.getInputSystem();
 		
+		PlayerInput playerInput = null;
+		
 		// game loop
 		while (!logic.isDone()) {
 			// render the model with all game objects
 			output.render();
 			
 			// get input data from player
-			PlayerInput playerInput = input.getUserInputWithWait();
+			playerInput = input.getUserInputWithWait();
 
 			// change model state and state of game objects if needed
 			logic.processInput(playerInput);
