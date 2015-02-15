@@ -3,19 +3,19 @@ package hodilka.model;
 import hodilka.exceptions.ValidationException;
 
 public class GameField {
-	private final GameCell[][] cells;
+	private final FieldCell[][] cells;
 	private final int wigthInCells;
 	private final int heightInCells;
 	
-	private GameCell selectedCell;
+	private FieldCell selectedCell;
 	
-	public GameField(int width, int height) {
-		this.wigthInCells = width;
-		this.heightInCells = height;
-		cells = new GameCell[this.heightInCells][this.wigthInCells];
-		for (GameCell[] line: cells) {
+	public GameField(int widthInCells, int heightInCells) {
+		this.wigthInCells = widthInCells;
+		this.heightInCells = heightInCells;
+		cells = new FieldCell[this.heightInCells][this.wigthInCells];
+		for (FieldCell[] line: cells) {
 			for (int k = 0; k < line.length; k++) {
-				line[k] = new GameCell();
+				line[k] = new FieldCell();
 			}
 		}
 		
@@ -27,11 +27,11 @@ public class GameField {
 		selectedCell = cells[x][y];
 	}
 	
-	public GameCell getSelectedCell() {
+	public FieldCell getSelectedCell() {
 		return selectedCell;
 	}
 
-	public void setCell(int i, int j, GameCell cell) {
+	public void setCell(int i, int j, FieldCell cell) {
 		validateCoordinates(i, j);
 		if (selectedCell == cells[i][j]) {
 			selectedCell = cell;
@@ -55,7 +55,7 @@ public class GameField {
 		return rep;
 	}
 
-	public GameCell getCell(int i, int j) {
+	public FieldCell getCell(int i, int j) {
 		validateCoordinates(i, j);
 		return cells[i][j];
 	}

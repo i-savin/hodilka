@@ -5,7 +5,7 @@ import hodilka.Constants;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GameCell {
+public class FieldCell {
 	private final List<GameObject> gameObjects = new LinkedList<GameObject>();
 	
 	public void addGameObject(GameObject gameObject) {

@@ -15,8 +15,8 @@ public class InputOutputEngie {
 	private OutputSystem outputSystem;
 
 	public InputOutputEngie (Model model) {
-		this.widthInChars = model.getWidthInChars();
-		this.heightInChars = model.getHeightInChars();
+		this.widthInChars = model.getWidthInCells();
+		this.heightInChars = model.getHeightInCells();
 		
 		// output system initialization
 		ConsoleInterface consoleInterface = ConsoleInterfaceFactory.getConsoleInterface("Hodilka", widthInChars, heightInChars);

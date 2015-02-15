@@ -2,32 +2,32 @@ package hodilka.model;
 
 public class Model {
 
-	private int widthInChars;
-	private int heightInChars;
+	private int widthInCells;
+	private int heightInCells;
 	private GameObject player;
 	
 	private GameField field;
 	private GameHud hud;
 	
-	public Model(int widthInChars, int heightInChars) {
-		this.widthInChars = widthInChars;
-		this.heightInChars = heightInChars;
+	public Model(int widthInCells, int heightInCells) {
+		this.widthInCells = widthInCells;
+		this.heightInCells = heightInCells;
 	}
 
-	public int getWidthInChars() {
-		return widthInChars;
+	public int getWidthInCells() {
+		return widthInCells;
 	}
 
-	public void setWidthInChars(int widthInChars) {
-		this.widthInChars = widthInChars;
+	public void setWidthInCells(int widthInCells) {
+		this.widthInCells = widthInCells;
 	}
 
-	public int getHeightInChars() {
-		return heightInChars;
+	public int getHeightInCells() {
+		return heightInCells;
 	}
 
-	public void setHeightInChars(int heightInChars) {
-		this.heightInChars = heightInChars;
+	public void setHeightInCells(int heightInCells) {
+		this.heightInCells = heightInCells;
 	}
 
 	public GameField getField() {
