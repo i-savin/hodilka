@@ -9,19 +9,27 @@ import hodilka.output.OutputSystem;
 
 public class Application {
 	
-	public void execute() {
-		
+	private ModelGenerator modelGenerator;
+	private Model model;
+	private InputOutputEngie ioEngie;
+	private LogicEngie logic;
+
+	public Application() {
 		// generate model
-		ModelGenerator modelGenerator = new ModelGenerator();
-		Model model = modelGenerator.createModel();
+		modelGenerator = new ModelGenerator();
+		model = modelGenerator.createModel();
 		
 		// initialize input and output systems
-		InputOutputEngie ioEngie = new InputOutputEngie(model);
+		ioEngie = new InputOutputEngie(model);
+
+		// initialize game logic
+		logic = new LogicEngie(model);
+	}
+	
+	public void execute() {
+				
 		OutputSystem output = ioEngie.getOutputSystem();
 		InputSystem input = ioEngie.getInputSystem();
-		
-		// initialize game logic
-		LogicEngie logic = new LogicEngie(model);
 		
 		// game loop
 		while (!logic.isDone()) {
@@ -37,6 +45,7 @@ public class Application {
 		
 	}
 
+	/** use to delay for UserInputNoWait*/
 	@SuppressWarnings("unused")
 	private synchronized void waitFor(long millis) {
 		try {
