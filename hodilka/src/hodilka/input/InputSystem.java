@@ -9,11 +9,11 @@ public class InputSystem {
 		this.inputSource = inputSource;
 	}
 
-	public UserInput getInputNoWait() {
+	public UserInput getUserInputNoWait() {
 		return inputSource.getInput();
 	}
 	
-	public UserInput getInputWithWait() {
+	public UserInput getUserInputWithWait() {
 		UserInput ui = inputSource.getInput();
 		if (ui.isEmpty()) {
 			synchronized (inputSource) {

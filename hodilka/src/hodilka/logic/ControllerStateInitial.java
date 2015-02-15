@@ -17,7 +17,6 @@ public class ControllerStateInitial implements ControllerState {
 	@Override
 	public void perform(GameContext gameContext) {
 		InputOutputEngie screen = gameContext.getScreen();
-		screen.createWindow(0, 0, screen.getWidth(), screen.getHeight(), "Hodilka's Main Menu");
 	}
 
 }

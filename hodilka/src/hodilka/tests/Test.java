@@ -15,21 +15,8 @@ public class Test {
 		Model model = modelGenerator.createModel();
 		
 		InputOutputEngie s = new InputOutputEngie(model);
-
-		s.createWindow(5, 10, 50, 20, "New Window!");
-		
-//		Window w = s.createWindow(10, 5, 50, 20, "Another Window!");
-		s.createWindow(10, 5, 50, 20, "Another Window!");
-		
 		s.render();
 		
-		s.display();
-		
-//		s.deleteWindow(w);
-//		
-//		s.redraw();
-//		
-//		s.display(System.out);
 	}
 
 }

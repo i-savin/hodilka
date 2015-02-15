@@ -23,7 +23,7 @@ public class Application {
 			ioEngie.render();
 			
 			// get input data from player
-			UserInput userInput = ioEngie.getInputSystem().getInputWithWait();
+			UserInput userInput = ioEngie.getInputSystem().getUserInputWithWait();
 
 			// change model state
 			logic.processInput(userInput);
@@ -32,9 +32,9 @@ public class Application {
 	}
 
 	@SuppressWarnings("unused")
-	private synchronized void waitFor(long milis) {
+	private synchronized void waitFor(long millis) {
 		try {
-			this.wait(milis);
+			this.wait(millis);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
