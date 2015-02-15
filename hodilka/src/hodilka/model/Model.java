@@ -46,9 +46,9 @@ public class Model {
 		this.player = player;
 	}
 
-	public char[][] getReprezentation() {
-		char[][] rep = field.getReprezentation();
-		rep[player.getTransform().getVerticalCord()][player.getTransform().getHorizontalCord()] = player.getRepresentation().getSign();
+	public GameObjectRepresentation[][] getReprezentation() {
+		GameObjectRepresentation[][] rep = field.getReprezentation();
+		rep[player.getTransform().getVerticalCord()][player.getTransform().getHorizontalCord()] = player.getRepresentation();
 		return rep;
 	}
 

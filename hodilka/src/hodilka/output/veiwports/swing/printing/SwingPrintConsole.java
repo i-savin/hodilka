@@ -3,6 +3,7 @@ package hodilka.output.veiwports.swing.printing;
 import hodilka.exceptions.ValidationException;
 import hodilka.input.InputSource;
 import hodilka.input.swing.SwingInputSource;
+import hodilka.model.GameObjectRepresentation;
 import hodilka.output.ConsoleInterface;
 
 import java.awt.Color;
@@ -155,8 +156,13 @@ public class SwingPrintConsole extends JFrame implements ConsoleInterface {
 	}
 	
 	@Override
-	public void print(int i, int j, char what, Color foreground, Color background) {
-		print(i, j, what, DEFAULT_CAHR_COLOR);
+	public void draw(GameObjectRepresentation[][] modelRep) {
+		for (int i = 0; i < modelRep.length; i++) {
+	    	for (int j = 0; j < modelRep[i].length; j++) {
+	    		GameObjectRepresentation gor = modelRep[i][j];
+	    		print(i, j, gor.getSign(), gor.getColor());
+	    	}
+		}
 	}
 	
 	public void flush() {
@@ -244,7 +250,7 @@ public class SwingPrintConsole extends JFrame implements ConsoleInterface {
 				if ( i == 0 || j == 0 || i == CHARS_HEIGHT -1 || j == CHARS_WIDTH - 1)
 					c.print(i,j, '*');
 				else
-					c.print(i,j, (char)('0' + i % 10));
+					c.print(i, j, (char)('0' + i % 10));
 		}
 //		textPane.setText("123456789\nABCDabcd---++");
 		c.flush();

@@ -45,8 +45,8 @@ public class GameField {
 		}
 	}
 
-	public char[][] getReprezentation() {
-		char[][] rep = new char[heightInCells][wigthInCells];
+	public GameObjectRepresentation[][] getReprezentation() {
+		GameObjectRepresentation rep[][] = new GameObjectRepresentation[heightInCells][wigthInCells];
 		for (int i = 0; i < heightInCells; i++) {
 			for (int j = 0; j < wigthInCells; j++) {
 				rep[i][j] = cells[i][j].getRepresentation();

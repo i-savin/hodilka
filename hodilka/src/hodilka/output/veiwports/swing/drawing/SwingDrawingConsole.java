@@ -2,6 +2,7 @@ package hodilka.output.veiwports.swing.drawing;
 
 import hodilka.input.InputSource;
 import hodilka.input.swing.SwingInputSource;
+import hodilka.model.GameObjectRepresentation;
 import hodilka.output.ConsoleInterface;
 
 import java.awt.BorderLayout;
@@ -91,18 +92,13 @@ public class SwingDrawingConsole extends JFrame implements ConsoleInterface {
 	}
 	
 	@Override
-	public void print(int i, int j, char what) {
-		textPanel.print(i, j, what, defaultForegroundColor, defaultBackgroundColor);
-	}
-	
-	@Override
-	public void print(int i, int j, char what, Color foreGround) {
-		textPanel.print(i, j, what, foreGround, defaultBackgroundColor);
-	}
-	
-	@Override
-	public void print(int i, int j, char what, Color foreGround, Color backGround) {
-		textPanel.print(i, j, what, foreGround, backGround);
+	public void draw(GameObjectRepresentation[][] modelRep) {
+		for (int i = 0; i < modelRep.length; i++) {
+	    	for (int j = 0; j < modelRep[i].length; j++) {
+	    		GameObjectRepresentation gor = modelRep[i][j];
+	    		textPanel.print(i, j, gor.getSign(), gor.getColor(), defaultBackgroundColor);
+	    	}
+		}
 	}
 	
 	@Override
@@ -143,11 +139,11 @@ public class SwingDrawingConsole extends JFrame implements ConsoleInterface {
 		console.clear();
 		
 		for (int i = 0; i < HEIGHT_IN_CHARS; i++) {
-			console.print(i, 0, (char)('0' + i % 10), colors[i % colors.length], colors[(i+1) % colors.length]);
+			console.textPanel.print(i, 0, (char)('0' + i % 10), colors[i % colors.length], colors[(i+1) % colors.length]);
 		}
 		
 		for (int i = 0; i < WIDTH_IN_CHARS; i++) {
-			console.print(0, i, (char)('0' + i % 10), colors[i % colors.length], colors[(i+1) % colors.length]);
+			console.textPanel.print(0, i, (char)('0' + i % 10), colors[i % colors.length], colors[(i+1) % colors.length]);
 		}
 		
 		console.repaint();

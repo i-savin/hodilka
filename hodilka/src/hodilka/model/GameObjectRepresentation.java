@@ -1,11 +1,23 @@
 package hodilka.model;
 
+import hodilka.Constants;
+
 import java.awt.Color;
 
 public class GameObjectRepresentation {
+	public static final GameObjectRepresentation EMPTY = new GameObjectRepresentation();
 	private char sign;
 	private Color color;
 	
+	public GameObjectRepresentation() {
+		this.sign = Constants.CLEAR_SYMBOL.getValue();
+		this.color = Color.WHITE;
+	}
+	
+	public GameObjectRepresentation(char sign, Color color) {
+		this.sign = sign;
+		this.color = color;
+	}
 	public char getSign() {
 		return sign;
 	}

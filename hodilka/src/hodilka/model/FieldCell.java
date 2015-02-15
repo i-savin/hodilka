@@ -1,7 +1,5 @@
 package hodilka.model;
 
-import hodilka.Constants;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,11 +14,11 @@ public class FieldCell {
 		gameObjects.remove(gameObject);
 	}
 
-	public char getRepresentation() {
+	public GameObjectRepresentation getRepresentation() {
 		if (gameObjects.isEmpty()) {
-			return Constants.CLEAR_SYMBOL.getValue();
+			return GameObjectRepresentation.EMPTY;
 		} else {
-			return gameObjects.get(gameObjects.size() - 1).getRepresentation().getSign();
+			return gameObjects.get(gameObjects.size() - 1).getRepresentation();
 		}
 	}
 }
