@@ -11,8 +11,10 @@ public class Application {
 	
 	private ModelGenerator modelGenerator;
 	private Model model;
-	private InputOutputEngie ioEngie;
-	private LogicEngie logic;
+	private InputOutputEngie ioEngine;
+	private LogicEngine logic;
+	private OutputSystem output;
+	private InputSystem input;
 
 	public Application() {
 		// generate model
@@ -20,16 +22,16 @@ public class Application {
 		model = modelGenerator.createModel();
 		
 		// initialize input and output systems
-		ioEngie = new InputOutputEngie(model);
+		ioEngine = new InputOutputEngie(model);
 
 		// initialize game logic
-		logic = new LogicEngie(model);
+		logic = new LogicEngine(model);
+		
+		output = ioEngine.getOutputSystem();
+		input = ioEngine.getInputSystem();
 	}
 	
 	public void execute() {
-				
-		OutputSystem output = ioEngie.getOutputSystem();
-		InputSystem input = ioEngie.getInputSystem();
 		
 		PlayerInput playerInput = null;
 		

@@ -3,11 +3,11 @@ package hodilka.main;
 import hodilka.input.PlayerInput;
 import hodilka.model.Model;
 
-public class LogicEngie {
+public class LogicEngine {
 
 	private Model model;
 	
-	public LogicEngie(Model model) {
+	public LogicEngine(Model model) {
 		this.model = model;
 	}
 
