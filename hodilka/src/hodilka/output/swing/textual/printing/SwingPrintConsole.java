@@ -1,4 +1,4 @@
-package hodilka.output.veiwports.swing.printing;
+package hodilka.output.swing.textual.printing;
 
 import hodilka.exceptions.ValidationException;
 import hodilka.input.InputSource;

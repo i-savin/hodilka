@@ -1,6 +1,6 @@
 package hodilka.output;
 
-import hodilka.output.veiwports.swing.drawing.SwingDrawingConsole;
+import hodilka.output.swing.textual.drawing.SwingDrawingConsole;
 
 
 public class ConsoleInterfaceFactory {

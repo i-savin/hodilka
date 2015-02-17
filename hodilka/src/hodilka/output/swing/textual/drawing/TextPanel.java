@@ -1,4 +1,4 @@
-package hodilka.output.veiwports.swing.drawing;
+package hodilka.output.swing.textual.drawing;
 
 import java.awt.Color;
 import java.awt.Font;
