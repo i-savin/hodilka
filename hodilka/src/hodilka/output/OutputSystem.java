@@ -1,6 +1,5 @@
 package hodilka.output;
 
-import hodilka.model.GameObjectRepresentation;
 import hodilka.model.Model;
 
 public class OutputSystem {
@@ -16,9 +15,7 @@ public class OutputSystem {
 	public void render() {
 		consoleInterface.clear();
 		
-		GameObjectRepresentation[][] modelRep = model.getReprezentation();
-		
-		consoleInterface.draw(modelRep);
+		consoleInterface.draw(model);
 		
 		consoleInterface.flush();
 	}

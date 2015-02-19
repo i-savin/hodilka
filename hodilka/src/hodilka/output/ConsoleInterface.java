@@ -1,14 +1,12 @@
 package hodilka.output;
 
-import hodilka.input.InputSource;
-import hodilka.model.GameObjectRepresentation;
+import hodilka.input.KeyInputSource;
+import hodilka.model.Model;
 
 public interface ConsoleInterface {
 	void init();
 	void clear();
 	void flush();
-	int getWidhtInChars();
-	int getHeightInChars();
-	InputSource getInputSource();
-	void draw(GameObjectRepresentation[][] modelRep);
+	KeyInputSource getInputSource();
+	void draw(Model model);
 }

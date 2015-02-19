@@ -59,5 +59,13 @@ public class GameField {
 		validateCoordinates(i, j);
 		return cells[i][j];
 	}
+
+	public int getWigthInCells() {
+		return wigthInCells;
+	}
+
+	public int getHeightInCells() {
+		return heightInCells;
+	}
 	
 }

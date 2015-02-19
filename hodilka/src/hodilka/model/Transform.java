@@ -16,7 +16,7 @@ public class Transform {
 	}
 	
 	public void moveLeft() {
-		moveLeft(1);
+		moveLeft(80);
 	}
 	
 	public void moveRight(int howMuch) {
@@ -24,7 +24,7 @@ public class Transform {
 	}
 	
 	public void moveRight() {
-		moveRight(1);
+		moveRight(80);
 	}
 	
 	public void moveUp(int howMuch) {
@@ -32,7 +32,7 @@ public class Transform {
 	}
 	
 	public void moveUp() {
-		moveUp(1);
+		moveUp(80);
 	}
 	
 	public void moveDown(int howMuch) {
@@ -40,7 +40,7 @@ public class Transform {
 	}
 	
 	public void moveDown() {
-		moveDown(1);
+		moveDown(80);
 	}
 	
 	public int getVerticalCord() {

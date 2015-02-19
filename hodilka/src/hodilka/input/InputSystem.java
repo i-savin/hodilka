@@ -3,19 +3,19 @@ package hodilka.input;
 
 public class InputSystem {
 
-	private InputSource inputSource;
+	private KeyInputSource inputSource;
 	
-	public InputSystem(InputSource inputSource) {
+	public InputSystem(KeyInputSource inputSource) {
 		this.inputSource = inputSource;
 	}
 
-	public PlayerInput getUserInputNoWait() {
+	public PlayerKeyInput getUserInputNoWait() {
 		return inputSource.getInput();
 	}
 	
 	/** Stops the thread until player pushes a keyboard button */
-	public PlayerInput getUserInputWithWait() {
-		PlayerInput ui = inputSource.getInput();
+	public PlayerKeyInput getUserInputWithWait() {
+		PlayerKeyInput ui = inputSource.getInput();
 		if (ui.isEmpty()) {
 			synchronized (inputSource) {
 				try {
