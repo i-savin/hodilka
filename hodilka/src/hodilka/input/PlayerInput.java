@@ -1,6 +1,6 @@
 package hodilka.input;
 
-/** Implicit shared data*/
+/** Implicit shared data */
 public class PlayerInput {
 
 	private boolean keyPressed;
@@ -15,7 +15,7 @@ public class PlayerInput {
 	public int button;
 	
 	public boolean isEmpty() {
-		// TODO change in order of occurrence rate
+		// TODO shuffle expr parts in order of occurrence rate to achieve better performance
 		return !keyPressed && !mouseMoved && !mouseButtonChanged;
 	}
 	
@@ -67,7 +67,7 @@ public class PlayerInput {
 	public void setButton(int button) {
 		this.button = button;
 	}
-	public void clear() {
+	public void cleanFlags() {
 		keyPressed = false;
 		mouseMoved = false;
 		mouseButtonChanged = false;
@@ -77,6 +77,9 @@ public class PlayerInput {
 	public String toString() {
 		return "PlayerInput [keyPressed=" + keyPressed + ", keyCode=" + keyCode
 				+ ", modifiers=" + modifiers + ", mouseMoved=" + mouseMoved
-				+ ", mouseX=" + mouseX + ", mouseY=" + mouseY + "]";
-	}	
+				+ ", mouseX=" + mouseX + ", mouseY=" + mouseY
+				+ ", mouseButtonChanged=" + mouseButtonChanged + ", button="
+				+ button + "]";
+	}
+	
 }

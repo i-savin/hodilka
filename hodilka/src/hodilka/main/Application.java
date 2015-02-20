@@ -39,21 +39,21 @@ public class Application {
 		
 		// game loop
 		while (!logic.isDone()) {
+			
 			markTime();
+			
 			// render the model with all game objects
 			output.render();
 			
 			// get input data from player
 			playerInput = input.getUserInputNoWait();
 			
-			System.out.println(playerInput);
+//			System.out.println(playerInput);
 
 			// change model state and state of game objects if needed
 			logic.processInput(playerInput);
 									
 			waitFor(timeToWait);
-
-
 		}
 		
 	}
@@ -66,11 +66,12 @@ public class Application {
 		markedTIme = System.currentTimeMillis();
 	}
 
-	/** use to delay for UserInputNoWait*/
+	/** use to delay */
 	private synchronized void waitFor(long millis) {
 		try {
 			long t = timeElipsed(millis);
 			if (t > 0)
+				// synchronized on this
 				this.wait(t);
 			else
 				;

@@ -11,7 +11,6 @@ public class GraphicsModelRender implements ModelRender {
 	public void render(Model model, Graphics graphicContext, int widthInPixels, int heghtInPixels) {
 		renderField(model, graphicContext);
 		renderPlayer(model, graphicContext);
-		
 	}
 
 	private void renderField(Model model, Graphics graphicContext) {

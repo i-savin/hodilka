@@ -38,7 +38,7 @@ public class LogicEngine {
 //			System.out.println("Mouse ! " + playerInput.getButton());
 		}
 		
-		playerInput.clear();
+		playerInput.cleanFlags();
 	}
 
 	public boolean isDone() {

@@ -93,7 +93,6 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 		
 		graphicsRender = new GraphicsModelRender();
 		
-		
 		// ECS close window hack
 		JPanel p = new JPanel();
 		p.setSize(0, 0);
@@ -160,18 +159,18 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 	@Override
 	public void paint(Graphics g) {
 		
-		int width = screen.getWidth(null);
-		int height = screen.getHeight(null);
+//		int width = screen.getWidth(null);
+//		int height = screen.getHeight(null);
 		
 		
-		float factorHeight = (float) heightInPixels/height;
-		float factorWidth = (float) widthInPixels/width;
+//		float factorHeight = (float) heightInPixels/height;
+//		float factorWidth = (float) widthInPixels/width;
 		
-		float readlWidth = Math.min(factorHeight, factorWidth) * width;
-		float readlHeight = Math.min(factorHeight, factorWidth) * height;
+//		float readlWidth = Math.min(factorHeight, factorWidth) * width;
+//		float readlHeight = Math.min(factorHeight, factorWidth) * height;
 		
 		// TODO repeats to much
-		Image screen = this.screen.getScaledInstance((int)readlWidth, (int)readlHeight, Image.SCALE_FAST);
+//		Image screen = this.screen.getScaledInstance((int)readlWidth, (int)readlHeight, Image.SCALE_FAST);
 		if (fullscreen)
 			g.drawImage(screen, 0, 0, null);
 		else 

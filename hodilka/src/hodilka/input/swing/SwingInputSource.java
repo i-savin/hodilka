@@ -11,10 +11,10 @@ import java.awt.event.MouseMotionListener;
 
 public class SwingInputSource implements InputSource, KeyListener, MouseListener, MouseMotionListener {
 
-	private PlayerInput pki = new PlayerInput();
+	private final PlayerInput pki = new PlayerInput();
 
 	@Override
-	public synchronized PlayerInput getInput() {
+	public PlayerInput getInput() {
 		return pki;
 	}
 	
@@ -23,7 +23,6 @@ public class SwingInputSource implements InputSource, KeyListener, MouseListener
 		pki.setKeyCode(e.getKeyCode());
 		pki.setModifiers(e.getModifiers());
 		pki.setKeyPressed(true);
-//		System.out.println("Key " + e.getKeyChar());
 	}
 
 	@Override
