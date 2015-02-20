@@ -3,29 +3,29 @@ package hodilka.input;
 
 public class InputSystem {
 
-	private KeyInputSource inputSource;
+	private InputSource inputSource;
 	
-	public InputSystem(KeyInputSource inputSource) {
+	public InputSystem(InputSource inputSource) {
 		this.inputSource = inputSource;
 	}
 
-	public PlayerKeyInput getUserInputNoWait() {
+	public PlayerInput getUserInputNoWait() {
 		return inputSource.getInput();
 	}
 	
-	/** Stops the thread until player pushes a keyboard button */
-	public PlayerKeyInput getUserInputWithWait() {
-		PlayerKeyInput ui = inputSource.getInput();
-		if (ui.isEmpty()) {
-			synchronized (inputSource) {
-				try {
-					inputSource.wait();
-					ui = inputSource.getInput();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return ui;
-	}
+//	/** Stops the thread until player pushes a keyboard button */
+//	public PlayerInput getUserInputWithWait() {
+//		PlayerInput ui = inputSource.getInput();
+//		if (ui.isEmpty()) {
+//			synchronized (inputSource) {
+//				try {
+//					inputSource.wait();
+//					ui = inputSource.getInput();
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		return ui;
+//	}
 }

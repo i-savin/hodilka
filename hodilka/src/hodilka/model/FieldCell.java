@@ -6,6 +6,8 @@ import java.util.List;
 public class FieldCell {
 	private final List<GameObject> gameObjects = new LinkedList<GameObject>();
 	
+	private boolean selected;
+	
 	public void addGameObject(GameObject gameObject) {
 		gameObjects.add(gameObject);
 	}
@@ -21,4 +23,13 @@ public class FieldCell {
 			return gameObjects.get(gameObjects.size() - 1).getRepresentation();
 		}
 	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+	
 }

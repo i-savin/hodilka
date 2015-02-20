@@ -22,11 +22,16 @@ public class GameField {
 		selectCell(0, 0);
 	}
 	
-	public void selectCell(int x, int y) {
-		validateCoordinates(x, y);
-		selectedCell = cells[x][y];
+	public void selectCell(int i, int j) {
+		if (areValidCoordinates(i, j)) {
+			if (selectedCell != null) {
+				selectedCell.setSelected(false);
+			}
+			selectedCell = cells[i][j];
+			selectedCell.setSelected(true);
+		}
 	}
-	
+
 	public FieldCell getSelectedCell() {
 		return selectedCell;
 	}
@@ -34,7 +39,9 @@ public class GameField {
 	public void setCell(int i, int j, FieldCell cell) {
 		validateCoordinates(i, j);
 		if (selectedCell == cells[i][j]) {
+			selectedCell.setSelected(false);
 			selectedCell = cell;
+			selectedCell.setSelected(true);
 		}
 		cells[i][j] = cell;
 	}
@@ -43,6 +50,11 @@ public class GameField {
 		if (0 > i && i >= heightInCells && 0 > j && j >= wigthInCells) {
 			throw new ValidationException("Wrong (i, j) == (" + i + "," + j + ")");
 		}
+	}
+	
+	
+	private boolean areValidCoordinates(int i, int j) {
+		return 0 <= i && i < heightInCells && 0 <= j && j < wigthInCells;
 	}
 
 	public GameObjectRepresentation[][] getReprezentation() {

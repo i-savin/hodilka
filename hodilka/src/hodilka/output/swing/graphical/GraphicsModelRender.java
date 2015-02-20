@@ -1,6 +1,7 @@
 package hodilka.output.swing.graphical;
 
 import hodilka.model.Model;
+import hodilka.model.ModelGenerator;
 
 import java.awt.Graphics;
 
@@ -24,6 +25,9 @@ public class GraphicsModelRender implements ModelRender {
 		for (int i = 0; i < model.getField().getHeightInCells(); i++) {
 			for (int j = 0; j < model.getField().getWigthInCells(); j++) {
 				graphicContext.drawImage(model.getField().getCell(i, j).getRepresentation().getImage(), j * cellWidth, i * cellHeight, null);
+				if (model.getField().getCell(i, j).isSelected()) {
+					graphicContext.drawImage(ModelGenerator.sellSelection, j * cellWidth, i * cellHeight, null);
+				}
 			}
 		}
 	}

@@ -8,6 +8,16 @@ import javax.imageio.ImageIO;
 
 public class ModelGenerator {
 
+	public static Image sellSelection;
+	static {
+		try {
+			sellSelection = ImageIO.read(ModelGenerator.class.getResourceAsStream("/cellSelection.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public Model createModel() {
 		Model model = new Model();
 		model.setField(generateGameField());
@@ -38,7 +48,7 @@ public class ModelGenerator {
 		
 		Image groundImage = null;
 		try {
-			groundImage = ImageIO.read(ModelGenerator.class.getResourceAsStream("/ground.png")).getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+			groundImage = ImageIO.read(ModelGenerator.class.getResourceAsStream("/ground.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

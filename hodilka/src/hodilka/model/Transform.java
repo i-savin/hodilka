@@ -5,6 +5,7 @@ public class Transform {
 	private int horizontalCord;
 	
 	private Rotation roration;
+	private int STEP_SIZE = 40;
 	
 	public void moveTo(int i, int j) {
 		this.verticalCord = i;
@@ -16,7 +17,7 @@ public class Transform {
 	}
 	
 	public void moveLeft() {
-		moveLeft(80);
+		moveLeft(STEP_SIZE);
 	}
 	
 	public void moveRight(int howMuch) {
@@ -24,7 +25,7 @@ public class Transform {
 	}
 	
 	public void moveRight() {
-		moveRight(80);
+		moveRight(STEP_SIZE);
 	}
 	
 	public void moveUp(int howMuch) {
@@ -32,7 +33,7 @@ public class Transform {
 	}
 	
 	public void moveUp() {
-		moveUp(80);
+		moveUp(STEP_SIZE );
 	}
 	
 	public void moveDown(int howMuch) {
@@ -40,7 +41,7 @@ public class Transform {
 	}
 	
 	public void moveDown() {
-		moveDown(80);
+		moveDown(STEP_SIZE);
 	}
 	
 	public int getVerticalCord() {

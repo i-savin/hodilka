@@ -2,8 +2,8 @@ package hodilka;
 
 import hodilka.input.InputSystem;
 import hodilka.model.Model;
-import hodilka.output.ConsoleInterface;
-import hodilka.output.ConsoleInterfaceFactory;
+import hodilka.output.OutputInterface;
+import hodilka.output.OutputInterfaceFactory;
 import hodilka.output.OutputSystem;
 
 public class InputOutputEngie {
@@ -14,7 +14,7 @@ public class InputOutputEngie {
 	public InputOutputEngie (Model model) {
 
 		// output system initialization
-		ConsoleInterface consoleInterface = ConsoleInterfaceFactory.getConsoleInterface("Hodilka", 640, 480);
+		OutputInterface consoleInterface = OutputInterfaceFactory.getConsoleInterface("Hodilka", 640, 480);
 		consoleInterface.init();
 		outputSystem = new OutputSystem(consoleInterface, model);
 		

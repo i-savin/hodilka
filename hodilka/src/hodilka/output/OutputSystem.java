@@ -4,10 +4,10 @@ import hodilka.model.Model;
 
 public class OutputSystem {
 	
-	private ConsoleInterface consoleInterface;
+	private OutputInterface consoleInterface;
 	private Model model;
 	
-	public OutputSystem(ConsoleInterface consoleInterface, Model model) {
+	public OutputSystem(OutputInterface consoleInterface, Model model) {
 		this.consoleInterface = consoleInterface;
 		this.model = model;
 	}

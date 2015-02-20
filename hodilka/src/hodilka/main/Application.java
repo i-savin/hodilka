@@ -2,7 +2,7 @@ package hodilka.main;
 
 import hodilka.InputOutputEngie;
 import hodilka.input.InputSystem;
-import hodilka.input.PlayerKeyInput;
+import hodilka.input.PlayerInput;
 import hodilka.model.Model;
 import hodilka.model.ModelGenerator;
 import hodilka.output.OutputSystem;
@@ -14,6 +14,9 @@ public class Application {
 	private LogicEngine logic;
 	private OutputSystem output;
 	private InputSystem input;
+	
+	private long markedTIme;
+	private long timeToWait = 20;
 
 	public Application() {
 		// generate model
@@ -32,28 +35,45 @@ public class Application {
 	
 	public void execute() {
 		
-		PlayerKeyInput playerInput = null;
+		PlayerInput playerInput = null;
 		
 		// game loop
 		while (!logic.isDone()) {
+			markTime();
 			// render the model with all game objects
 			output.render();
 			
 			// get input data from player
 			playerInput = input.getUserInputNoWait();
+			
+			System.out.println(playerInput);
 
 			// change model state and state of game objects if needed
 			logic.processInput(playerInput);
-			
-			waitFor(20);
+									
+			waitFor(timeToWait);
+
+
 		}
 		
+	}
+
+	private long timeElipsed(long delta) {
+		return delta - System.currentTimeMillis() + markedTIme;
+	}
+
+	private void markTime() {
+		markedTIme = System.currentTimeMillis();
 	}
 
 	/** use to delay for UserInputNoWait*/
 	private synchronized void waitFor(long millis) {
 		try {
-			this.wait(millis);
+			long t = timeElipsed(millis);
+			if (t > 0)
+				this.wait(t);
+			else
+				;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

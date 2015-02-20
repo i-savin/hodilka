@@ -1,27 +1,34 @@
 package hodilka.output.swing.graphical;
 
-import hodilka.input.KeyInputSource;
-import hodilka.input.swing.SwingKeyInputSource;
-import hodilka.input.swing.SwingMouseInputSource;
+import hodilka.input.InputSource;
+import hodilka.input.swing.SwingInputSource;
 import hodilka.model.Model;
-import hodilka.output.ConsoleInterface;
+import hodilka.output.OutputInterface;
 
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 @SuppressWarnings("serial")
-public class SwingGraphicsInterface extends JFrame implements ConsoleInterface {
+public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 
 	class ResizeListener implements ComponentListener  {
 
@@ -31,7 +38,7 @@ public class SwingGraphicsInterface extends JFrame implements ConsoleInterface {
 			Rectangle rect = SwingGraphicsInterface.this.getBounds();
 			
 			SwingGraphicsInterface.this.widthInPixels = rect.width;
-			SwingGraphicsInterface.this.heghtInPixels = rect.height;
+			SwingGraphicsInterface.this.heightInPixels = rect.height;
 		}
 		@Override
 		public void componentMoved(ComponentEvent e) { }
@@ -42,31 +49,38 @@ public class SwingGraphicsInterface extends JFrame implements ConsoleInterface {
 	}
 	
 	private int widthInPixels;
-	private int heghtInPixels;
+	private int heightInPixels;
 	
 	private Image screen;
 	private Graphics screenGraphics;
-	private SwingKeyInputSource inputSource;
+	private SwingInputSource inputSource;
 	
 	private ModelRender graphicsRender;
 	
-	public SwingGraphicsInterface(String title, int widthInPixels, int heghtInPixels) {
+	private boolean fullscreen;
+	
+	public SwingGraphicsInterface(String title, int widthInPixels, int heightInPixels, boolean fullscreen) {
 		super(title);
 		
-		this.widthInPixels = widthInPixels;
-		this.heghtInPixels = heghtInPixels;
+		this.fullscreen = fullscreen;
 		
-		this.setSize(widthInPixels, heghtInPixels);
+		if (this.fullscreen) {
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			
+			this.widthInPixels = (int) dimension.getWidth();
+			this.heightInPixels = (int) dimension.getHeight();
+			
+			this.setUndecorated(true);
+		} else {
+			this.widthInPixels = widthInPixels;
+			this.heightInPixels = heightInPixels;
+		}
+		
+		this.setSize(this.widthInPixels, this.heightInPixels);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		inputSource = new SwingKeyInputSource();
-		this.addKeyListener(inputSource);
-		
-		SwingMouseInputSource mouseInputSource = new SwingMouseInputSource();
-		
-		this.addMouseListener(mouseInputSource);
-		this.addMouseMotionListener(mouseInputSource);
+		inputSource = new SwingInputSource();
 		
 		try {
 			Image image = ImageIO.read(SwingGraphicsInterface.class.getResourceAsStream("/cursor.png"));
@@ -78,6 +92,26 @@ public class SwingGraphicsInterface extends JFrame implements ConsoleInterface {
 		}
 		
 		graphicsRender = new GraphicsModelRender();
+		
+		
+		// ECS close window hack
+		JPanel p = new JPanel();
+		p.setSize(0, 0);
+		this.add(p);
+		
+		p.addKeyListener(inputSource);
+		p.addMouseListener(inputSource);
+		p.addMouseMotionListener(inputSource);
+
+		
+		p.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "close-window");
+		final JFrame mainWindow = this;
+		Action dispatchClosing = new AbstractAction() { 
+	        public void actionPerformed(ActionEvent event) { 
+	        	mainWindow.dispatchEvent(new WindowEvent(mainWindow, WindowEvent.WINDOW_CLOSING));
+	        }
+	    }; 
+	    p.getActionMap().put("close-window", dispatchClosing);
 	}
 	
 	@Override
@@ -86,12 +120,12 @@ public class SwingGraphicsInterface extends JFrame implements ConsoleInterface {
 		Rectangle rect = this.getBounds();
 		
 		this.widthInPixels = rect.width;
-		this.heghtInPixels = rect.height;
+		this.heightInPixels = rect.height;
 		
-		screen = new BufferedImage(widthInPixels, heghtInPixels, BufferedImage.TYPE_INT_RGB);
+		screen = new BufferedImage(this.widthInPixels, this.heightInPixels, BufferedImage.TYPE_INT_RGB);
 		screenGraphics = screen.getGraphics();
 		
-		this.setSize(widthInPixels, heghtInPixels);
+		this.setSize(widthInPixels, heightInPixels);
 				
 		setVisible(true);
 //		setResizable(false);
@@ -111,13 +145,13 @@ public class SwingGraphicsInterface extends JFrame implements ConsoleInterface {
 	}
 
 	@Override
-	public KeyInputSource getInputSource() {
+	public InputSource getInputSource() {
 		return inputSource;
 	}
 
 	@Override
 	public void draw(Model model) {
-		graphicsRender.render(model, screenGraphics, widthInPixels, heghtInPixels);
+		graphicsRender.render(model, screenGraphics, widthInPixels, heightInPixels);
 //		  //Print used memory
 //        System.out.println("Used Memory:"
 //            + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024*1024));
@@ -126,10 +160,22 @@ public class SwingGraphicsInterface extends JFrame implements ConsoleInterface {
 	@Override
 	public void paint(Graphics g) {
 		
-		// TODO repeats to much
-//		Image screen = this.screen.getScaledInstance(widthInPixels, widthInPixels, Image.SCALE_FAST);
+		int width = screen.getWidth(null);
+		int height = screen.getHeight(null);
 		
-		g.drawImage(screen, 0, 0, null);
+		
+		float factorHeight = (float) heightInPixels/height;
+		float factorWidth = (float) widthInPixels/width;
+		
+		float readlWidth = Math.min(factorHeight, factorWidth) * width;
+		float readlHeight = Math.min(factorHeight, factorWidth) * height;
+		
+		// TODO repeats to much
+		Image screen = this.screen.getScaledInstance((int)readlWidth, (int)readlHeight, Image.SCALE_FAST);
+		if (fullscreen)
+			g.drawImage(screen, 0, 0, null);
+		else 
+			g.drawImage(screen, 5, 30, null);
 	}
 	
 }

@@ -1,12 +1,12 @@
 package hodilka.output;
 
-import hodilka.input.KeyInputSource;
+import hodilka.input.InputSource;
 import hodilka.model.Model;
 
-public interface ConsoleInterface {
+public interface OutputInterface {
 	void init();
 	void clear();
 	void flush();
-	KeyInputSource getInputSource();
+	InputSource getInputSource();
 	void draw(Model model);
 }
