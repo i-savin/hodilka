@@ -7,6 +7,7 @@ public class Model {
 	private GameField field;
 	private GameHud hud;
 	private MainMenu menu;
+	private Inventory inventory;
 	
 	public Model() {
 	}
