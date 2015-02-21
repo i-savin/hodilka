@@ -159,8 +159,8 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 	@Override
 	public void paint(Graphics g) {
 		
-//		int width = screen.getWidth(null);
-//		int height = screen.getHeight(null);
+		int width = screen.getWidth(null);
+		int height = screen.getHeight(null);
 		
 		
 //		float factorHeight = (float) heightInPixels/height;
@@ -171,10 +171,20 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 		
 		// TODO repeats to much
 //		Image screen = this.screen.getScaledInstance((int)readlWidth, (int)readlHeight, Image.SCALE_FAST);
+		
+		int widthScaleFactor = (widthInPixels - width) / 2;
+		int heightScaleFactor = (heightInPixels - height) / 2;
+		
+		if (widthScaleFactor < 0)
+			widthScaleFactor = 0;
+		
+		if (heightScaleFactor < 0)
+			heightScaleFactor = 0;
+		
 		if (fullscreen)
-			g.drawImage(screen, 0, 0, null);
+			g.drawImage(screen, 0 + widthScaleFactor, 0 + heightScaleFactor, null);
 		else 
-			g.drawImage(screen, 5, 30, null);
+			g.drawImage(screen, 5 + widthScaleFactor, 30 + heightScaleFactor, null);
 	}
 	
 }

@@ -57,15 +57,15 @@ public class GameField {
 		return 0 <= i && i < heightInCells && 0 <= j && j < wigthInCells;
 	}
 
-	public GameObjectRepresentation[][] getReprezentation() {
-		GameObjectRepresentation rep[][] = new GameObjectRepresentation[heightInCells][wigthInCells];
-		for (int i = 0; i < heightInCells; i++) {
-			for (int j = 0; j < wigthInCells; j++) {
-				rep[i][j] = cells[i][j].getRepresentation();
-			}
-		}
-		return rep;
-	}
+//	public GameObjectRepresentation[][] getReprezentation() {
+//		GameObjectRepresentation rep[][] = new GameObjectRepresentation[heightInCells][wigthInCells];
+//		for (int i = 0; i < heightInCells; i++) {
+//			for (int j = 0; j < wigthInCells; j++) {
+//				rep[i][j] = cells[i][j].getRepresentation();
+//			}
+//		}
+//		return rep;
+//	}
 
 	public FieldCell getCell(int i, int j) {
 		validateCoordinates(i, j);
