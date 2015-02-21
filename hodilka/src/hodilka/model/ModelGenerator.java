@@ -22,23 +22,26 @@ public class ModelGenerator {
 		Model model = new Model();
 		model.setField(generateGameField());
 		model.setPlayer(generatePlayer());
+		
+		model.getField().getCell(5, 5).addGameObject(model.getPlayer().getGameObject());
+		
 		return model;
 	}
 
-	private GameObject generatePlayer() {
-		GameObject player = new GameObject();
-		player.getRepresentation().setSign('@');
-		player.getRepresentation().setColor(Color.RED);
+	private Player generatePlayer() {
+		Player player = new Player();
+		
+		GameObject playerGameObject = new GameObject();
+		playerGameObject.getRepresentation().setColor(Color.RED);
 		try {
-			player.getRepresentation().setImage(ImageIO.read(ModelGenerator.class.getResourceAsStream("/player.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+			playerGameObject.getRepresentation().setImage(ImageIO.read(ModelGenerator.class.getResourceAsStream("/player.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		player.setTransform(new Transform());
-		player.getTransform().setHorizontalCord(40 * 5);
-		player.getTransform().setVerticalCord(40 * 5);
-
+		playerGameObject.setTransform(new Transform());
+		player.setGameObject(playerGameObject);
+		
 		return player;
 	}
 
@@ -67,6 +70,16 @@ public class ModelGenerator {
 				FieldCell cell = new FieldCell();
 				cell.addGameObject(ground);
 				field.setCell(i, j, cell);
+				
+				if (0 <= j - 1) {
+					cell.setLeftCell(field.getCell(i, j - 1));
+					field.getCell(i, j - 1).setRightCell(cell);
+				}
+				
+				if (0 <= i - 1) {
+					cell.setUpCell(field.getCell(i - 1, j));
+					field.getCell(i - 1, j).setDownCell(cell);
+				}
 			}
 		}
 		

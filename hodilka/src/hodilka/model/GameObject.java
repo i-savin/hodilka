@@ -4,6 +4,7 @@ public class GameObject {
 	private Transform transform;
 	private GameObjectRepresentation representation = new GameObjectRepresentation();
 	private String discription;
+	private FieldCell locationCell;
 	
 	public Transform getTransform() {
 		return transform;
@@ -23,5 +24,10 @@ public class GameObject {
 	public void setRepresentation(GameObjectRepresentation representation) {
 		this.representation = representation;
 	}
-	
+	public FieldCell getLocationCell() {
+		return locationCell;
+	}
+	public void setLocationCell(FieldCell locationCell) {
+		this.locationCell = locationCell;
+	}
 }

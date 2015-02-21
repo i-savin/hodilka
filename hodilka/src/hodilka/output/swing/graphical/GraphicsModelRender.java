@@ -16,7 +16,6 @@ public class GraphicsModelRender implements ModelRender {
 		this.heghtInPixels = heghtInPixels;
 		
 		renderField(model, graphicContext);
-		renderPlayer(model, graphicContext);
 		renderHud(model, graphicContext);
 	}
 
@@ -33,13 +32,6 @@ public class GraphicsModelRender implements ModelRender {
 				
 			}
 		}
-	}
-
-	private void renderPlayer(Model model, Graphics graphicContext) {
-		int playerX = model.getPlayer().getTransform().getHorizontalCord();
-		int playerY = model.getPlayer().getTransform().getVerticalCord();
-
-		graphicContext.drawImage(model.getPlayer().getRepresentation().getImage(), playerX, playerY, null);
 	}
 
 	private void renderHud(Model model, Graphics graphicContext) {

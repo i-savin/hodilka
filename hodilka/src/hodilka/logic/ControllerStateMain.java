@@ -15,16 +15,16 @@ public class ControllerStateMain implements ControllerState {
 		
 		if (playerInput.isKeyPressed()) {
 			if (playerInput.getKeyCode() == 37) {
-				model.getPlayer().getTransform().moveLeft();
+				model.getPlayer().moveLeft();
 			}
 			if (playerInput.getKeyCode() == 38) {
-				model.getPlayer().getTransform().moveUp();
+				model.getPlayer().moveUp();
 			}
 			if (playerInput.getKeyCode() == 39) {
-				model.getPlayer().getTransform().moveRight();
+				model.getPlayer().moveRight();
 			}
 			if (playerInput.getKeyCode() == 40) {
-				model.getPlayer().getTransform().moveDown();
+				model.getPlayer().moveDown();
 			}
 		}
 		

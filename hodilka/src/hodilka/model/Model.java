@@ -2,7 +2,7 @@ package hodilka.model;
 
 public class Model {
 	
-	private GameObject player;
+	private Player player;
 	
 	private GameField field;
 	private GameHud hud;
@@ -20,11 +20,11 @@ public class Model {
 		this.field = field;
 	}
 
-	public GameObject getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(GameObject player) {
+	public void setPlayer(Player player) {
 		this.player = player;
 	}
 
