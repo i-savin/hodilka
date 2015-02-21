@@ -1,7 +1,7 @@
 package hodilka.model;
 
 public class Model {
-
+	
 	private GameObject player;
 	
 	private GameField field;
@@ -27,4 +27,18 @@ public class Model {
 		this.player = player;
 	}
 
+	public void actualizeViewPortSize(int screenWidthInPixels, int screenHeightInPixels) {
+		
+	}
+
+	public void checkSelection(int mouseX, int mouseY, int screenWidthInPixels, int screenHeightInPixels) {
+		
+		mouseX -= (screenWidthInPixels - field.getWigthInCells() * 40) / 2;
+		mouseY -= (screenHeightInPixels - field.getHeightInCells() * 40) / 2;
+		
+		int j = mouseX / 40;
+		int i = mouseY / 40;
+		field.selectCell(i, j);
+	}
+	
 }

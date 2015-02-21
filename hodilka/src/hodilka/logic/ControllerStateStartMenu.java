@@ -1,5 +1,8 @@
 package hodilka.logic;
 
+import hodilka.input.PlayerInput;
+import hodilka.model.Model;
+
 public class ControllerStateStartMenu implements ControllerState {
 
 	@Override
@@ -9,7 +12,7 @@ public class ControllerStateStartMenu implements ControllerState {
 	}
 
 	@Override
-	public void perform(GameContext gameContext) {
+	public void perform(Model model, PlayerInput playerInput) {
 		// TODO Auto-generated method stub
 
 	}

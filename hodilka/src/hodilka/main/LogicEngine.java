@@ -1,42 +1,24 @@
 package hodilka.main;
 
 import hodilka.input.PlayerInput;
+import hodilka.logic.Controller;
 import hodilka.model.Model;
 
 public class LogicEngine {
 
 	private Model model;
+	private Controller controller;
 	
 	public LogicEngine(Model model) {
 		this.model = model;
+		controller = new Controller(model);
 	}
 
 	public void processInput(PlayerInput playerInput) {
 		
-		if (playerInput.isKeyPressed()) {
-			if (playerInput.getKeyCode() == 37) {
-				model.getPlayer().getTransform().moveLeft();
-			}
-			if (playerInput.getKeyCode() == 38) {
-				model.getPlayer().getTransform().moveUp();
-			}
-			if (playerInput.getKeyCode() == 39) {
-				model.getPlayer().getTransform().moveRight();
-			}
-			if (playerInput.getKeyCode() == 40) {
-				model.getPlayer().getTransform().moveDown();
-			}
-		}
+		model.actualizeViewPortSize(playerInput.getActualWidthInPixels(), playerInput.getActualHeightInPixels());
 		
-		if (playerInput.isMouseMoved()) {
-			int j = playerInput.getMouseX() / 40;
-			int i = playerInput.getMouseY() / 40;
-			model.getField().selectCell(i, j);
-		}
-		
-		if (playerInput.isMouseButtonChanged()) {
-//			System.out.println("Mouse ! " + playerInput.getButton());
-		}
+		controller.nextState(playerInput);
 		
 		playerInput.cleanFlags();
 	}

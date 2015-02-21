@@ -30,14 +30,15 @@ public class ModelGenerator {
 		player.getRepresentation().setSign('@');
 		player.getRepresentation().setColor(Color.RED);
 		try {
-			player.getRepresentation().setImage(ImageIO.read(ModelGenerator.class.getResourceAsStream("/player.png")).getScaledInstance(237/4, 479/4, Image.SCALE_SMOOTH));
+			player.getRepresentation().setImage(ImageIO.read(ModelGenerator.class.getResourceAsStream("/player.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		player.setTransform(new Transform());
-		player.getTransform().setHorizontalCord(237/2 - 5);
-		player.getTransform().setVerticalCord(479/4);
+		player.getTransform().setHorizontalCord(40 * 5);
+		player.getTransform().setVerticalCord(40 * 5);
+
 		return player;
 	}
 

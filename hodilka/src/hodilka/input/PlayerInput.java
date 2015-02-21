@@ -14,6 +14,9 @@ public class PlayerInput {
 	private boolean mouseButtonChanged;
 	public int button;
 	
+	private int actualWidthInPixels;
+	private int actualHeightInPixels;
+	
 	public boolean isEmpty() {
 		// TODO shuffle expr parts in order of occurrence rate to achieve better performance
 		return !keyPressed && !mouseMoved && !mouseButtonChanged;
@@ -67,12 +70,24 @@ public class PlayerInput {
 	public void setButton(int button) {
 		this.button = button;
 	}
+	public int getActualWidthInPixels() {
+		return actualWidthInPixels;
+	}
+	public void setActualWidthInPixels(int actualWidthInPixels) {
+		this.actualWidthInPixels = actualWidthInPixels;
+	}
+	public int getActualHeightInPixels() {
+		return actualHeightInPixels;
+	}
+	public void setActualHeightInPixels(int actualHeightInPixels) {
+		this.actualHeightInPixels = actualHeightInPixels;
+	}
 	public void cleanFlags() {
 		keyPressed = false;
 		mouseMoved = false;
 		mouseButtonChanged = false;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "PlayerInput [keyPressed=" + keyPressed + ", keyCode=" + keyCode

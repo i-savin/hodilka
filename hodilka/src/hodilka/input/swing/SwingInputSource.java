@@ -37,7 +37,12 @@ public class SwingInputSource implements InputSource, KeyListener, MouseListener
 		pki.setButton(e.getButton());
 		pki.setMouseButtonChanged(true);
 	}
-
+	
+	public void setWidthAndHeight(int width, int height) {
+		pki.setActualWidthInPixels(width);
+		pki.setActualHeightInPixels(height);
+	}
+	
 	public void keyTyped(KeyEvent e)		{ /* no implementation */ }
 	public void keyReleased(KeyEvent e)		{ /* no implementation */ }
 	public void mouseDragged(MouseEvent e)	{ /* no implementation */ }

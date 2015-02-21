@@ -39,6 +39,8 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 			
 			SwingGraphicsInterface.this.widthInPixels = rect.width;
 			SwingGraphicsInterface.this.heightInPixels = rect.height;
+			
+			SwingGraphicsInterface.this.inputSource.setWidthAndHeight(rect.width, rect.height);
 		}
 		@Override
 		public void componentMoved(ComponentEvent e) { }
@@ -122,6 +124,8 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 		this.heightInPixels = rect.height;
 		
 		screen = new BufferedImage(this.widthInPixels, this.heightInPixels, BufferedImage.TYPE_INT_RGB);
+		// FIXME width, height of image hould be taken from model game field size
+		screen = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
 		screenGraphics = screen.getGraphics();
 		
 		this.setSize(widthInPixels, heightInPixels);
@@ -175,11 +179,11 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 		int widthScaleFactor = (widthInPixels - width) / 2;
 		int heightScaleFactor = (heightInPixels - height) / 2;
 		
-		if (widthScaleFactor < 0)
-			widthScaleFactor = 0;
-		
-		if (heightScaleFactor < 0)
-			heightScaleFactor = 0;
+//		if (widthScaleFactor < 0)
+//			widthScaleFactor = 0;
+//		
+//		if (heightScaleFactor < 0)
+//			heightScaleFactor = 0;
 		
 		if (fullscreen)
 			g.drawImage(screen, 0 + widthScaleFactor, 0 + heightScaleFactor, null);

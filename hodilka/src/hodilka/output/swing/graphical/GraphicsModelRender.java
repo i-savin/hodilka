@@ -43,6 +43,7 @@ public class GraphicsModelRender implements ModelRender {
 	}
 
 	private void renderHud(Model model, Graphics graphicContext) {
-		graphicContext.drawString("10/10", 50, heghtInPixels - 50);
+		graphicContext.drawString("10/10", 50, 50);
+//		System.out.println(heghtInPixels - 50);
 	}
 }

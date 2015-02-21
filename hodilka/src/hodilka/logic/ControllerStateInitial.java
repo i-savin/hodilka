@@ -1,12 +1,13 @@
 package hodilka.logic;
 
-import hodilka.InputOutputEngie;
+import hodilka.input.PlayerInput;
+import hodilka.model.Model;
 
 public class ControllerStateInitial implements ControllerState {
 
 	@Override
 	public ControllerState nextState() {
-		return new ControllerStateStartMenu();
+		return new ControllerStateMain();
 	}
 
 	@Override
@@ -15,8 +16,7 @@ public class ControllerStateInitial implements ControllerState {
 	}
 
 	@Override
-	public void perform(GameContext gameContext) {
-		InputOutputEngie screen = gameContext.getScreen();
+	public void perform(Model model, PlayerInput playerInput) {
 	}
 
 }
