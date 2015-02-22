@@ -26,6 +26,10 @@ public class ControllerStateMain implements ControllerState {
 			if (playerInput.getKeyCode() == 40) {
 				model.getPlayer().moveDown();
 			}
+			
+			if (playerInput.getKeyCode() == 73) { // i
+				model.getInventory().setVisible(!model.getInventory().isVisible());
+			}
 		}
 		
 		if (playerInput.isMouseMoved()) {
@@ -36,6 +40,7 @@ public class ControllerStateMain implements ControllerState {
 		if (playerInput.isMouseButtonChanged()) {
 //			System.out.println("Mouse ! " + playerInput.getButton());
 		}
+		
 	}
 
 	@Override

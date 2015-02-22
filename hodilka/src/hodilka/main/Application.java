@@ -54,7 +54,7 @@ public class Application {
 
 			// change model state and state of game objects if needed
 			logic.processInput(playerInput);
-									
+			
 			waitFor(timeToWait);
 		}
 		

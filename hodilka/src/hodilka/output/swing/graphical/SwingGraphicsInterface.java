@@ -5,6 +5,7 @@ import hodilka.input.swing.SwingInputSource;
 import hodilka.model.Model;
 import hodilka.output.OutputInterface;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -17,13 +18,11 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
@@ -42,6 +41,7 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 			SwingGraphicsInterface.this.heightInPixels = rect.height;
 			
 			SwingGraphicsInterface.this.inputSource.setWidthAndHeight(rect.width, rect.height);
+			panel.setSize(rect.width, rect.height);
 		}
 		
 		@Override public void componentMoved(ComponentEvent e) { }
@@ -60,20 +60,17 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 	
 	private JPanel panel;
 	
-	private boolean fullscreen;
-	
 	public SwingGraphicsInterface(String title, int widthInPixels, int heightInPixels, boolean fullscreen) {
 		super(title);
 		
-		this.fullscreen = fullscreen;
-		
-		if (this.fullscreen) {
+		if (fullscreen) {
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			
 			this.widthInPixels = (int) dimension.getWidth();
 			this.heightInPixels = (int) dimension.getHeight();
 			
 			this.setUndecorated(true);
+			
 		} else {
 			this.widthInPixels = widthInPixels;
 			this.heightInPixels = heightInPixels;
@@ -84,6 +81,7 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		inputSource = new SwingInputSource();
+		inputSource.setWidthAndHeight(this.widthInPixels, this.heightInPixels);
 		
 		try {
 			Image image = ImageIO.read(SwingGraphicsInterface.class.getResourceAsStream("/cursor.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -97,6 +95,8 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 		// ECS close window hack
 		panel = new JPanel();
 		panel.setSize(this.widthInPixels, this.heightInPixels);
+//		this.setLayout(new GridLayout(1, 1));
+//		this.getLayeredPane().add(panel);
 		this.add(panel);
 		
 		panel.addKeyListener(inputSource);
@@ -112,6 +112,8 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 	        }
 	    }; 
 	    panel.getActionMap().put("close-window", dispatchClosing);
+	    
+	    setBackground(Color.BLACK);
 	}
 	
 	@Override
@@ -127,7 +129,8 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 //		screen = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
 		
 		pack();
-		screen = panel.createImage(widthInPixels, heightInPixels); // does not work, returns null
+		// TODO need to make image of maximum size
+		screen = this.createImage(widthInPixels * 3, heightInPixels * 3); // does not work, returns null
 		screenGraphics = screen.getGraphics();
 		
 		this.setSize(widthInPixels, heightInPixels);
@@ -135,10 +138,9 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 		setVisible(true);
 //		setResizable(false);
 		
-		this.addComponentListener(this.new ResizeListener());
-		
 		graphicsRender = new GraphicsModelRender(model);
-
+		
+		this.addComponentListener(this.new ResizeListener());
 	}
 
 	@Override
@@ -167,38 +169,7 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 	
 	@Override
 	public void paint(Graphics g) {
-		
-//		int width = screen.getWidth(null);
-//		int height = screen.getHeight(null);
-//		
-//		
-////		float factorHeight = (float) heightInPixels/height;
-////		float factorWidth = (float) widthInPixels/width;
-//		
-////		float readlWidth = Math.min(factorHeight, factorWidth) * width;
-////		float readlHeight = Math.min(factorHeight, factorWidth) * height;
-//		
-//		// TODO repeats to much
-////		Image screen = this.screen.getScaledInstance((int)readlWidth, (int)readlHeight, Image.SCALE_FAST);
-//		
-//		int widthScaleFactor = (widthInPixels - width) / 2;
-//		int heightScaleFactor = (heightInPixels - height) / 2;
-//		
-////		if (widthScaleFactor < 0)
-////			widthScaleFactor = 0;
-////		
-////		if (heightScaleFactor < 0)
-////			heightScaleFactor = 0;
-//		
-//		if (fullscreen)
-//			g.drawImage(screen, 0 + widthScaleFactor, 0 + heightScaleFactor, null);
-//		else 
-//			g.drawImage(screen, 5 + widthScaleFactor, 30 + heightScaleFactor, null);
-		
-		if (fullscreen)
-			g.drawImage(screen, 0, 0, null);
-		else 
-			g.drawImage(screen, 0, 0, null);
+		g.drawImage(screen, 0, 0, null);
 	}
 	
 }

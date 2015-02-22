@@ -28,6 +28,8 @@ public class ModelGenerator {
 		
 		model.setHud(generateHud());
 		
+		model.setInventory(generateInventory());
+		
 		return model;
 	}
 
@@ -109,5 +111,24 @@ public class ModelGenerator {
 		hud.setHeightInPixels(80);
 		
 		return hud;
+	}
+	
+	private Inventory generateInventory() {
+		Inventory inventory = new Inventory();
+		
+		Image inventoryImage = null;
+		try {
+			inventoryImage = ImageIO.read(ModelGenerator.class.getResourceAsStream("/inventory.png")).getScaledInstance(600, 400, Image.SCALE_SMOOTH);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		inventory.setImg(inventoryImage);
+		
+		inventory.setWidthInPixels(600);
+		inventory.setHeightInPixels(400);
+		
+		return inventory;
 	}
 }

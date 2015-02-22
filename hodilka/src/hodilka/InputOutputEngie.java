@@ -14,7 +14,7 @@ public class InputOutputEngie {
 	public InputOutputEngie (Model model) {
 
 		// output system initialization
-		OutputInterface consoleInterface = OutputInterfaceFactory.getConsoleInterface("Hodilka", 640*2, 480*2);
+		OutputInterface consoleInterface = OutputInterfaceFactory.getConsoleInterface("Hodilka", 640, 480);
 		consoleInterface.init(model);
 		outputSystem = new OutputSystem(consoleInterface, model);
 		

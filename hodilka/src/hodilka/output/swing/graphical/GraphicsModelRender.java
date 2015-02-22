@@ -18,32 +18,29 @@ public class GraphicsModelRender implements ModelRender {
 	
 	private Model model;
 	
+	private Graphics screenGraphicContext;
+	
 	public GraphicsModelRender(Model model) {
 		this.model = model;
 		this.fieldImage = new BufferedImage(model.getField().getWidthInPixels(), model.getField().getHeightInPixels(), BufferedImage.TYPE_INT_RGB);
 		this.hudImage = new BufferedImage(model.getHud().getWidthInPixels(), model.getHud().getHeightInPixels(), BufferedImage.TYPE_INT_RGB);
+		this.inventoryImage = new BufferedImage(model.getInventory().getWidthInPixels(), model.getInventory().getHeightInPixels(), BufferedImage.TYPE_INT_RGB);
 	}
 	
 	@Override
 	public void render(Graphics screenGraphicContext, int screenWidthInPixels, int screenHeghtInPixels) {
+		
+		this.screenGraphicContext = screenGraphicContext;
 		
 		this.screenWidthInPixels = screenWidthInPixels;
 		this.screenHeghtInPixels = screenHeghtInPixels;
 		
 		renderField(model, fieldImage.getGraphics());
 		renderHud(model, hudImage.getGraphics());
-		renderInventory(model, screenGraphicContext);
-		renderContextMenu(model, screenGraphicContext);
+		if (model.getInventory().isVisible())
+		renderInventory(model, inventoryImage.getGraphics());
+		renderContextMenu(model, null);
 		
-		int widthScaleFactor = (screenWidthInPixels - model.getField().getWidthInPixels()) / 2;
-		int heightScaleFactor = (screenHeghtInPixels - model.getField().getHeightInPixels()) / 2;
-		
-		screenGraphicContext.drawImage(fieldImage, 0 + widthScaleFactor, 0 + heightScaleFactor, null);
-		
-		
-		int hudX = (this.screenWidthInPixels - model.getHud().getWidthInPixels()) / 2; // center on horizontal
-		int hudY = this.screenHeghtInPixels - model.getHud().getHeightInPixels();      // down on vertical
-		screenGraphicContext.drawImage(hudImage, hudX, hudY, null);
 	}
 
 	private void renderField(Model model, Graphics graphicContext) {
@@ -59,14 +56,28 @@ public class GraphicsModelRender implements ModelRender {
 				
 			}
 		}
+		
+		int widthScaleFactor = (screenWidthInPixels - model.getField().getWidthInPixels()) / 2;
+		int heightScaleFactor = (screenHeghtInPixels - model.getField().getHeightInPixels()) / 2;
+		
+		screenGraphicContext.drawImage(fieldImage, widthScaleFactor, heightScaleFactor, null);
 	}
 
 	private void renderHud(Model model, Graphics graphicContext) {	
 		graphicContext.drawImage(model.getHud().getImg(), 0, 0, null);
+		
+		int hudX = (this.screenWidthInPixels - model.getHud().getWidthInPixels()) / 2; // center on horizontal
+		int hudY = this.screenHeghtInPixels - model.getHud().getHeightInPixels();      // down on vertical
+		screenGraphicContext.drawImage(hudImage, hudX, hudY, null);
 	}
 
 	private void renderInventory(Model model, Graphics graphicContext) {
-		// TODO Auto-generated method stub
+		graphicContext.drawImage(model.getInventory().getImg(), 0, 0, null);
+		
+		int widthScaleFactor = (screenWidthInPixels - model.getInventory().getWidthInPixels()) / 2;
+		int heightScaleFactor = (screenHeghtInPixels - model.getInventory().getHeightInPixels()) / 2;
+		
+		screenGraphicContext.drawImage(inventoryImage, widthScaleFactor, heightScaleFactor, null);
 		
 	}
 

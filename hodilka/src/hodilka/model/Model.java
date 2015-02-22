@@ -2,11 +2,11 @@ package hodilka.model;
 
 public class Model {
 	
-	private Player player;
+	private MainMenu menu;
 	
+	private Player player;
 	private GameField field;
 	private GameHud hud;
-	private MainMenu menu;
 	private Inventory inventory;
 	
 	public Model() {
@@ -36,14 +36,22 @@ public class Model {
 		this.hud = hud;
 	}
 
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
 	public void actualizeViewPortSize(int screenWidthInPixels, int screenHeightInPixels) {
 		
 	}
 
 	public void checkSelection(int mouseX, int mouseY, int screenWidthInPixels, int screenHeightInPixels) {
 		
-		mouseX -= (screenWidthInPixels - field.getWigthInCells() * 40) / 2;
-		mouseY -= (screenHeightInPixels - field.getHeightInCells() * 40) / 2;
+		mouseX -= (screenWidthInPixels - field.getWigthInCells() * 40) / 2 - 5;
+		mouseY -= (screenHeightInPixels - field.getHeightInCells() * 40) / 2 - 30;
 		
 		int j = mouseX / 40;
 		int i = mouseY / 40;
