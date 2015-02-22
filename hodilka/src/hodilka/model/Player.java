@@ -48,4 +48,40 @@ public class Player {
 		}
 	}
 
+	public void moveLeftUp() {
+		FieldCell cell = gameObject.getLocationCell();
+		FieldCell leftUp = cell.getLeftUpCell();
+		if (leftUp != null) {
+			cell.removeGameObject(gameObject);
+			leftUp.addGameObject(gameObject);
+		}
+	}
+
+	public void moveLeftDown() {
+		FieldCell cell = gameObject.getLocationCell();
+		FieldCell leftDown = cell.getLeftDownCell();
+		if (leftDown != null) {
+			cell.removeGameObject(gameObject);
+			leftDown.addGameObject(gameObject);
+		}
+	}
+
+	public void moveRightUp() {
+		FieldCell cell = gameObject.getLocationCell();
+		FieldCell rightUp = cell.getRightUpCell();
+		if (rightUp != null) {
+			cell.removeGameObject(gameObject);
+			rightUp.addGameObject(gameObject);
+		}
+	}
+
+	public void moveRightDown() {
+		FieldCell cell = gameObject.getLocationCell();
+		FieldCell rightDown = cell.getRightDownCell();
+		if (rightDown != null) {
+			cell.removeGameObject(gameObject);
+			rightDown.addGameObject(gameObject);
+		}
+	}
+
 }

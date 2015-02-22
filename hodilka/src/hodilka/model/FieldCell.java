@@ -13,6 +13,11 @@ public class FieldCell {
 	private FieldCell upCell;
 	private FieldCell downCell;
 	
+	private FieldCell leftUpCell;
+	private FieldCell rightUpCell;
+	private FieldCell leftDownCell;
+	private FieldCell rightDownCell;
+	
 	private boolean selected;
 	
 	private int i;
@@ -89,6 +94,38 @@ public class FieldCell {
 
 	public void setDownCell(FieldCell downCell) {
 		this.downCell = downCell;
+	}
+
+	public FieldCell getLeftUpCell() {
+		return leftUpCell;
+	}
+
+	public void setLeftUpCell(FieldCell leftUpCell) {
+		this.leftUpCell = leftUpCell;
+	}
+
+	public FieldCell getRightUpCell() {
+		return rightUpCell;
+	}
+
+	public void setRightUpCell(FieldCell rightUpCell) {
+		this.rightUpCell = rightUpCell;
+	}
+
+	public FieldCell getLeftDownCell() {
+		return leftDownCell;
+	}
+
+	public void setLeftDownCell(FieldCell leftDownCell) {
+		this.leftDownCell = leftDownCell;
+	}
+
+	public FieldCell getRightDownCell() {
+		return rightDownCell;
+	}
+
+	public void setRightDownCell(FieldCell rightDownCell) {
+		this.rightDownCell = rightDownCell;
 	}
 
 	public int getI() {

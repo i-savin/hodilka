@@ -85,6 +85,16 @@ public class ModelGenerator {
 					cell.setUpCell(field.getCell(i - 1, j));
 					field.getCell(i - 1, j).setDownCell(cell);
 				}
+				
+				if (0 <= i - 1 && 0 <= j - 1) {
+					cell.setLeftUpCell(field.getCell(i - 1, j - 1));
+					field.getCell(i - 1, j - 1).setRightDownCell(cell);
+				}
+				
+				if (0 <= i - 1 && j + 1 < widthInCells) {
+					cell.setRightUpCell(field.getCell(i - 1, j + 1));
+					field.getCell(i - 1, j + 1).setLeftDownCell(cell);
+				}
 			}
 		}
 		

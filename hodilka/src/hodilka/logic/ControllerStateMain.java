@@ -15,35 +15,36 @@ public class ControllerStateMain implements ControllerState {
 		
 		if (playerInput.isKeyPressed()) {
 			
-			if (playerInput.getKeyCode() == 65) {
+			if (playerInput.getKeyCode() == 65) { // a
 				model.getPlayer().moveLeft();
 			}
-			if (playerInput.getKeyCode() == 87) {
+			if (playerInput.getKeyCode() == 87) { // w
 				model.getPlayer().moveUp();
 			}
-			if (playerInput.getKeyCode() == 68) {
+			if (playerInput.getKeyCode() == 68) { // d
 				model.getPlayer().moveRight();
 			}
-			if (playerInput.getKeyCode() == 83) {
+			if (playerInput.getKeyCode() == 88) { // x
 				model.getPlayer().moveDown();
 			}
+			
+			if (playerInput.getKeyCode() == 81) { // q
+				model.getPlayer().moveLeftUp();
+			}
+			if (playerInput.getKeyCode() == 69) { // e
+				model.getPlayer().moveRightUp();
+			}
+			if (playerInput.getKeyCode() == 90) { // z
+				model.getPlayer().moveLeftDown();
+			}
+			if (playerInput.getKeyCode() == 67) { // c
+				model.getPlayer().moveRightDown();
+			}
+			
 			
 			if (playerInput.getKeyCode() == 73) { // i
 				model.getInventory().setVisible(!model.getInventory().isVisible());
 			}
-			
-//			if (playerInput.getKeyCode() == 37) {
-//				model.getPlayer().moveLeft();
-//			}
-//			if (playerInput.getKeyCode() == 38) {
-//				model.getPlayer().moveUp();
-//			}
-//			if (playerInput.getKeyCode() == 39) {
-//				model.getPlayer().moveRight();
-//			}
-//			if (playerInput.getKeyCode() == 40) {
-//				model.getPlayer().moveDown();
-//			}
 			
 		}
 		
