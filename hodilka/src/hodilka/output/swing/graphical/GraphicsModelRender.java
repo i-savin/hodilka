@@ -57,10 +57,25 @@ public class GraphicsModelRender implements ModelRender {
 			}
 		}
 		
-		int widthScaleFactor = (screenWidthInPixels - model.getField().getWidthInPixels()) / 2;
-		int heightScaleFactor = (screenHeghtInPixels - model.getField().getHeightInPixels()) / 2;
+		// field centred camera: begin
+//		int widthScaleFactor = (screenWidthInPixels - model.getField().getWidthInPixels()) / 2;
+//		int heightScaleFactor = (screenHeghtInPixels - model.getField().getHeightInPixels()) / 2;
+//		
+//		screenGraphicContext.drawImage(fieldImage, widthScaleFactor, heightScaleFactor, null);
+		// field centred camera: end
+		
+		// player centred camera: begin
+		int playerX = model.getPlayer().getGameObject().getLocationCell().getJ() * 40 + 20;
+		int playerY = model.getPlayer().getGameObject().getLocationCell().getI() * 40 + 20;
+
+		int screenCenterX = screenWidthInPixels / 2;
+		int screenCenterY = screenHeghtInPixels / 2;
+		
+		int widthScaleFactor = screenCenterX - playerX;
+		int heightScaleFactor = screenCenterY - playerY;
 		
 		screenGraphicContext.drawImage(fieldImage, widthScaleFactor, heightScaleFactor, null);
+		// player centred camera: end
 	}
 
 	private void renderHud(Model model, Graphics graphicContext) {	

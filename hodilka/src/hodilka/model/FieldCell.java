@@ -15,6 +15,14 @@ public class FieldCell {
 	
 	private boolean selected;
 	
+	private int i;
+	private int j;
+	
+	public FieldCell(int i, int j) {
+		this.i = i;
+		this.j = j;
+	}
+	
 	public void addGameObject(GameObject gameObject) {
 		gameObjectStack.add(gameObject);
 		gameObject.setLocationCell(this);
@@ -81,6 +89,22 @@ public class FieldCell {
 
 	public void setDownCell(FieldCell downCell) {
 		this.downCell = downCell;
+	}
+
+	public int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
+
+	public int getJ() {
+		return j;
+	}
+
+	public void setJ(int j) {
+		this.j = j;
 	}
 
 	public void render(Graphics graphicContext, int x, int y) {

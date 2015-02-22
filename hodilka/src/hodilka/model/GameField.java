@@ -20,9 +20,9 @@ public class GameField {
 		
 		cells = new FieldCell[this.heightInCells][this.wigthInCells];
 		
-		for (FieldCell[] line: cells) {
-			for (int k = 0; k < line.length; k++) {
-				line[k] = new FieldCell();
+		for (int i = 0; i < heightInCells; i++) {
+			for (int j = 0; j < wigthInCells; j++) {
+				cells[i][j] = new FieldCell(i, j);
 			}
 		}
 	}

@@ -50,12 +50,27 @@ public class Model {
 
 	public void checkSelection(int mouseX, int mouseY, int screenWidthInPixels, int screenHeightInPixels) {
 		
-		mouseX -= (screenWidthInPixels - field.getWigthInCells() * 40) / 2 - 5;
-		mouseY -= (screenHeightInPixels - field.getHeightInCells() * 40) / 2 - 30;
+		// field centred camera: begin
+//		mouseX -= (screenWidthInPixels - field.getWigthInCells() * 40) / 2 - 5;
+//		mouseY -= (screenHeightInPixels - field.getHeightInCells() * 40) / 2 - 30;
+		// field centred camera: end
+		
+		// player centred camera: begin
+		int playerX = player.getGameObject().getLocationCell().getJ() * 40 + 20;
+		int playerY = player.getGameObject().getLocationCell().getI() * 40 + 20;
+
+		int screenCenterX = screenWidthInPixels / 2;
+		int screenCenterY = screenHeightInPixels / 2;
+		
+		// FIXME 5, 30 - толщина рамок окна
+		mouseX = playerX - (screenCenterX - mouseX) + 5;
+		mouseY = playerY - (screenCenterY - mouseY) + 30;
+		// player centred camera: end
 		
 		int j = mouseX / 40;
 		int i = mouseY / 40;
 		field.selectCell(i, j);
+
 	}
 	
 }

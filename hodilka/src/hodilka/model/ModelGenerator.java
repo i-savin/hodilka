@@ -72,7 +72,7 @@ public class ModelGenerator {
 				ground.setRepresentation(new GameObjectRepresentation());
 				ground.getRepresentation().setImage(groundImage);
 				
-				FieldCell cell = new FieldCell();
+				FieldCell cell = new FieldCell(i , j);
 				cell.addGameObject(ground);
 				field.setCell(i, j, cell);
 				
