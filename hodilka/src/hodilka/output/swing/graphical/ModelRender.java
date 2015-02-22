@@ -5,5 +5,5 @@ import java.awt.Graphics;
 import hodilka.model.Model;
 
 public interface ModelRender {
-	void render(Model model, Graphics screenGraphics, int widthInPixels, int heghtInPixels);
+	void render(Graphics screenGraphics, int widthInPixels, int heghtInPixels);
 }

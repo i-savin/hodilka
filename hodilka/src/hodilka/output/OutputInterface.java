@@ -4,9 +4,9 @@ import hodilka.input.InputSource;
 import hodilka.model.Model;
 
 public interface OutputInterface {
-	void init();
+	void init(Model model);
 	void clear();
 	void flush();
 	InputSource getInputSource();
-	void draw(Model model);
+	void draw();
 }

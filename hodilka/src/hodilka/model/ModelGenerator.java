@@ -20,10 +20,13 @@ public class ModelGenerator {
 	
 	public Model createModel() {
 		Model model = new Model();
-		model.setField(generateGameField());
-		model.setPlayer(generatePlayer());
 		
+		model.setField(generateGameField());
+
+		model.setPlayer(generatePlayer());
 		model.getField().getCell(5, 5).addGameObject(model.getPlayer().getGameObject());
+		
+		model.setHud(generateHud());
 		
 		return model;
 	}
@@ -83,7 +86,28 @@ public class ModelGenerator {
 			}
 		}
 		
+		field.setHeightInPixels(heightInCells * 40);
+		field.setWidthInPixels(widthInCells * 40);
+		
 		return field;
 	}
-	
+
+	private GameHud generateHud() {
+		GameHud hud = new GameHud();
+		
+		Image hudImage = null;
+		try {
+			hudImage = ImageIO.read(ModelGenerator.class.getResourceAsStream("/hud.png")).getScaledInstance(400, 80, Image.SCALE_SMOOTH);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		hud.setImg(hudImage);
+		
+		hud.setWidthInPixels(400);
+		hud.setHeightInPixels(80);
+		
+		return hud;
+	}
 }

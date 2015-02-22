@@ -4,22 +4,27 @@ import hodilka.exceptions.ValidationException;
 
 public class GameField {
 	private final FieldCell[][] cells;
+	
 	private final int wigthInCells;
 	private final int heightInCells;
+	
+	private int widthInPixels;
+	private int heightInPixels;
 	
 	private FieldCell selectedCell;
 	
 	public GameField(int widthInCells, int heightInCells) {
+		
 		this.wigthInCells = widthInCells;
 		this.heightInCells = heightInCells;
+		
 		cells = new FieldCell[this.heightInCells][this.wigthInCells];
+		
 		for (FieldCell[] line: cells) {
 			for (int k = 0; k < line.length; k++) {
 				line[k] = new FieldCell();
 			}
 		}
-		
-		selectCell(0, 0);
 	}
 	
 	public void selectCell(int i, int j) {
@@ -52,20 +57,9 @@ public class GameField {
 		}
 	}
 	
-	
 	private boolean areValidCoordinates(int i, int j) {
 		return 0 <= i && i < heightInCells && 0 <= j && j < wigthInCells;
 	}
-
-//	public GameObjectRepresentation[][] getReprezentation() {
-//		GameObjectRepresentation rep[][] = new GameObjectRepresentation[heightInCells][wigthInCells];
-//		for (int i = 0; i < heightInCells; i++) {
-//			for (int j = 0; j < wigthInCells; j++) {
-//				rep[i][j] = cells[i][j].getRepresentation();
-//			}
-//		}
-//		return rep;
-//	}
 
 	public FieldCell getCell(int i, int j) {
 		validateCoordinates(i, j);
@@ -78,6 +72,22 @@ public class GameField {
 
 	public int getHeightInCells() {
 		return heightInCells;
+	}
+
+	public int getWidthInPixels() {
+		return widthInPixels;
+	}
+
+	public void setWidthInPixels(int widthInPixels) {
+		this.widthInPixels = widthInPixels;
+	}
+
+	public int getHeightInPixels() {
+		return heightInPixels;
+	}
+
+	public void setHeightInPixels(int heightInPixels) {
+		this.heightInPixels = heightInPixels;
 	}
 	
 }

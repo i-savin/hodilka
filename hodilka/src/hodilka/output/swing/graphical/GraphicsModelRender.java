@@ -4,19 +4,46 @@ import hodilka.model.GameField;
 import hodilka.model.Model;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class GraphicsModelRender implements ModelRender {
 
-	private int widthInPixels;
-	private int heghtInPixels;
+	private int screenWidthInPixels;
+	private int screenHeghtInPixels;
+	
+	private BufferedImage fieldImage;
+	private BufferedImage hudImage;
+	private BufferedImage inventoryImage;
+	private BufferedImage contextMenuImage;
+	
+	private Model model;
+	
+	public GraphicsModelRender(Model model) {
+		this.model = model;
+		this.fieldImage = new BufferedImage(model.getField().getWidthInPixels(), model.getField().getHeightInPixels(), BufferedImage.TYPE_INT_RGB);
+		this.hudImage = new BufferedImage(model.getHud().getWidthInPixels(), model.getHud().getHeightInPixels(), BufferedImage.TYPE_INT_RGB);
+	}
+	
 	@Override
-	public void render(Model model, Graphics graphicContext, int widthInPixels, int heghtInPixels) {
+	public void render(Graphics screenGraphicContext, int screenWidthInPixels, int screenHeghtInPixels) {
 		
-		this.widthInPixels = widthInPixels;
-		this.heghtInPixels = heghtInPixels;
+		this.screenWidthInPixels = screenWidthInPixels;
+		this.screenHeghtInPixels = screenHeghtInPixels;
 		
-		renderField(model, graphicContext);
-		renderHud(model, graphicContext);
+		renderField(model, fieldImage.getGraphics());
+		renderHud(model, hudImage.getGraphics());
+		renderInventory(model, screenGraphicContext);
+		renderContextMenu(model, screenGraphicContext);
+		
+		int widthScaleFactor = (screenWidthInPixels - model.getField().getWidthInPixels()) / 2;
+		int heightScaleFactor = (screenHeghtInPixels - model.getField().getHeightInPixels()) / 2;
+		
+		screenGraphicContext.drawImage(fieldImage, 0 + widthScaleFactor, 0 + heightScaleFactor, null);
+		
+		
+		int hudX = (this.screenWidthInPixels - model.getHud().getWidthInPixels()) / 2; // center on horizontal
+		int hudY = this.screenHeghtInPixels - model.getHud().getHeightInPixels();      // down on vertical
+		screenGraphicContext.drawImage(hudImage, hudX, hudY, null);
 	}
 
 	private void renderField(Model model, Graphics graphicContext) {
@@ -34,8 +61,17 @@ public class GraphicsModelRender implements ModelRender {
 		}
 	}
 
-	private void renderHud(Model model, Graphics graphicContext) {
-		graphicContext.drawString("10/10", 50, 50);
-//		System.out.println(heghtInPixels - 50);
+	private void renderHud(Model model, Graphics graphicContext) {	
+		graphicContext.drawImage(model.getHud().getImg(), 0, 0, null);
+	}
+
+	private void renderInventory(Model model, Graphics graphicContext) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void renderContextMenu(Model model, Graphics graphicContext) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -28,6 +28,14 @@ public class Model {
 		this.player = player;
 	}
 
+	public GameHud getHud() {
+		return hud;
+	}
+
+	public void setHud(GameHud hud) {
+		this.hud = hud;
+	}
+
 	public void actualizeViewPortSize(int screenWidthInPixels, int screenHeightInPixels) {
 		
 	}

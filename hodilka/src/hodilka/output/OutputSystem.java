@@ -15,7 +15,7 @@ public class OutputSystem {
 	public void render() {
 		consoleInterface.clear();
 		
-		consoleInterface.draw(model);
+		consoleInterface.draw();
 		
 		consoleInterface.flush();
 	}
