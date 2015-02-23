@@ -1,60 +1,22 @@
 package hodilka.model;
 
 public class Transform {
-	private int verticalCord;
-	private int horizontalCord;
+	private int x;
+	private int y;
 	
 	private Rotation roration;
-	private int STEP_SIZE = 40;
 	
-	public void moveTo(int i, int j) {
-		this.verticalCord = i;
-		this.horizontalCord = j;
+	public int getY() {
+		return x;
 	}
-	
-	public void moveLeft(int howMuch) {
-		this.horizontalCord -= howMuch;
+	public void setY(int verticalCord) {
+		this.x = verticalCord;
 	}
-	
-	public void moveLeft() {
-		moveLeft(STEP_SIZE);
+	public int getX() {
+		return y;
 	}
-	
-	public void moveRight(int howMuch) {
-		this.horizontalCord += howMuch;
-	}
-	
-	public void moveRight() {
-		moveRight(STEP_SIZE);
-	}
-	
-	public void moveUp(int howMuch) {
-		this.verticalCord -= howMuch;
-	}
-	
-	public void moveUp() {
-		moveUp(STEP_SIZE );
-	}
-	
-	public void moveDown(int howMuch) {
-		this.verticalCord += howMuch;
-	}
-	
-	public void moveDown() {
-		moveDown(STEP_SIZE);
-	}
-	
-	public int getVerticalCord() {
-		return verticalCord;
-	}
-	public void setVerticalCord(int verticalCord) {
-		this.verticalCord = verticalCord;
-	}
-	public int getHorizontalCord() {
-		return horizontalCord;
-	}
-	public void setHorizontalCord(int horizontalCord) {
-		this.horizontalCord = horizontalCord;
+	public void setX(int horizontalCord) {
+		this.y = horizontalCord;
 	}
 
 	public Rotation getRoration() {
