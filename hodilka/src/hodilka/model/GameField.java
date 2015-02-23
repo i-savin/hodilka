@@ -62,6 +62,13 @@ public class GameField {
 		}
 	}
 
+	public void deselect() {
+		if (selectedCell != null) {
+			selectedCell.setSelected(false);
+			selectedCell = null;
+		}
+	}
+	
 	public FieldCell getSelectedCell() {
 		return selectedCell;
 	}

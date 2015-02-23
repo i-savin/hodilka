@@ -50,8 +50,8 @@ public class GraphicsModelRender implements ModelRender {
 		// field centred camera: end
 		
 		// player centred camera: begin
-		int playerX = model.getPlayer().getGameObject().getLocationCell().getJ() * 40 + 20;
-		int playerY = model.getPlayer().getGameObject().getLocationCell().getI() * 40 + 20;
+		int playerX = model.getPlayer().getGameObject().getLocationCell().getJ() * cellWidth + cellWidth / 2;
+		int playerY = model.getPlayer().getGameObject().getLocationCell().getI() * cellHeight + cellHeight / 2;
 
 		int screenCenterX = screenWidthInPixels / 2;
 		int screenCenterY = screenHeghtInPixels / 2;

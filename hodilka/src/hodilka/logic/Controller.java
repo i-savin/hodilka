@@ -5,7 +5,7 @@ import hodilka.model.Model;
 
 public class Controller {
 //	private ControllerState state = new ControllerStateInitial();
-	private ControllerState state = new ControllerStateMain();
+	private ControllerState state = new ControllerStateField();
 	private Model model;
 	
 	public Controller(Model model) {

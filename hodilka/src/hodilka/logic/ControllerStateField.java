@@ -3,11 +3,13 @@ package hodilka.logic;
 import hodilka.input.PlayerInput;
 import hodilka.model.Model;
 
-public class ControllerStateMain implements ControllerState {
+public class ControllerStateField implements ControllerState {
 
+	private ControllerState next = this;
+	
 	@Override
 	public ControllerState nextState() {
-		return this;
+		return next;
 	}
 
 	@Override
@@ -43,7 +45,8 @@ public class ControllerStateMain implements ControllerState {
 			
 			
 			if (playerInput.getKeyCode() == 73) { // i
-				model.getInventory().setOpend(!model.getInventory().isOpend());
+				model.getInventory().setOpend(true);
+				next = new ControllerStateInventory();
 			}
 			
 		}

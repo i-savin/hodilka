@@ -63,13 +63,18 @@ public class Model {
 		int screenCenterY = screenHeightInPixels / 2;
 		
 		// FIXME 5, 30 - толщина рамок окна
-		mouseX = playerX - (screenCenterX - mouseX) + 5;
-		mouseY = playerY - (screenCenterY - mouseY) + 30;
+		int mouseXOffset = playerX - (screenCenterX - mouseX) + 5;
+		int mouseYOffset = playerY - (screenCenterY - mouseY) + 30;
 		// player centred camera: end
 		
-		int j = mouseX / 40;
-		int i = mouseY / 40;
-		field.selectCell(i, j);
+		// if mouse over the field
+		if (mouseXOffset > 0 && mouseYOffset > 0) {
+			int j = mouseXOffset / 40;
+			int i = mouseYOffset / 40;
+			field.selectCell(i, j);
+		} else {
+			field.deselect();
+		}
 
 	}
 	
