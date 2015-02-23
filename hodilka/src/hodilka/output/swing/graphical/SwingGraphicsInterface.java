@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -70,7 +72,10 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 			this.heightInPixels = (int) dimension.getHeight();
 			
 			this.setUndecorated(true);
+			this.setResizable(false);
 			
+			GraphicsDevice defaultScreen = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+			defaultScreen.setFullScreenWindow(this);
 		} else {
 			this.widthInPixels = widthInPixels;
 			this.heightInPixels = heightInPixels;
