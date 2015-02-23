@@ -7,6 +7,9 @@ public class GameField {
 	
 	private final int wigthInCells;
 	private final int heightInCells;
+
+	private int offsetOnXInPixels;
+	private int offsetOnYInPixels;
 	
 	private int widthInPixels;
 	private int heightInPixels;
@@ -23,6 +26,28 @@ public class GameField {
 		for (int i = 0; i < heightInCells; i++) {
 			for (int j = 0; j < wigthInCells; j++) {
 				cells[i][j] = new FieldCell(i, j);
+				
+				FieldCell cell = cells[i][j];
+				
+				if (0 <= j - 1) {
+					cell.setLeftCell(cells[i][j - 1]);
+					cells[i][j - 1].setRightCell(cell);
+				}
+				
+				if (0 <= i - 1) {
+					cell.setUpCell(cells[i - 1][j]);
+					cells[i - 1][j].setDownCell(cell);
+				}
+				
+				if (0 <= i - 1 && 0 <= j - 1) {
+					cell.setLeftUpCell(cells[i - 1][j - 1]);
+					cells[i - 1][j - 1].setRightDownCell(cell);
+				}
+				
+				if (0 <= i - 1 && j + 1 < widthInCells) {
+					cell.setRightUpCell(cells[i - 1][j + 1]);
+					cells[i - 1][j + 1].setLeftDownCell(cell);
+				}
 			}
 		}
 	}
@@ -72,6 +97,22 @@ public class GameField {
 
 	public int getHeightInCells() {
 		return heightInCells;
+	}
+
+	public int getOffsetOnXInPixels() {
+		return offsetOnXInPixels;
+	}
+
+	public void setOffsetOnXInPixels(int offsetOnXInPixels) {
+		this.offsetOnXInPixels = offsetOnXInPixels;
+	}
+
+	public int getOffsetOnYInPixels() {
+		return offsetOnYInPixels;
+	}
+
+	public void setOffsetOnYInPixels(int offsetOnYInPixels) {
+		this.offsetOnYInPixels = offsetOnYInPixels;
 	}
 
 	public int getWidthInPixels() {
