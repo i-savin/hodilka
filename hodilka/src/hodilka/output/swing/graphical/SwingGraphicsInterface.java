@@ -114,6 +114,8 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 	    panel.getActionMap().put("close-window", dispatchClosing);
 	    
 	    setBackground(Color.BLACK);
+	    
+	    setLocationRelativeTo(null); // on screen center
 	}
 	
 	@Override

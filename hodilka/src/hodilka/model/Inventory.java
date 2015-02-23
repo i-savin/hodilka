@@ -4,19 +4,19 @@ import java.awt.Image;
 
 public class Inventory {
 	
-	private boolean visible;
+	private boolean opend;
 	
 	private Image img;
 	
 	private int widthInPixels;
 	private int heightInPixels;
 
-	public boolean isVisible() {
-		return visible;
+	public boolean isOpend() {
+		return opend;
 	}
 
-	public void setVisible(boolean visible) {
-		this.visible = visible;
+	public void setOpend(boolean opend) {
+		this.opend = opend;
 	}
 
 	public Image getImg() {

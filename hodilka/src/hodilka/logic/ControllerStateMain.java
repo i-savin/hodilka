@@ -43,7 +43,7 @@ public class ControllerStateMain implements ControllerState {
 			
 			
 			if (playerInput.getKeyCode() == 73) { // i
-				model.getInventory().setVisible(!model.getInventory().isVisible());
+				model.getInventory().setOpend(!model.getInventory().isOpend());
 			}
 			
 		}

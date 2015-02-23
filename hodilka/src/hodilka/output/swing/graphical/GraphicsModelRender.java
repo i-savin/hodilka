@@ -37,8 +37,11 @@ public class GraphicsModelRender implements ModelRender {
 		
 		renderField(model, fieldImage.getGraphics());
 		renderHud(model, hudImage.getGraphics());
-		if (model.getInventory().isVisible())
-		renderInventory(model, inventoryImage.getGraphics());
+		
+		if (model.getInventory().isOpend()) {
+			renderInventory(model, inventoryImage.getGraphics());
+		}
+		
 		renderContextMenu(model, null);
 		
 	}
