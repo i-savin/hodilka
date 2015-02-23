@@ -4,17 +4,11 @@ import hodilka.model.GameField;
 import hodilka.model.Model;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 public class GraphicsModelRender implements ModelRender {
 
 	private int screenWidthInPixels;
 	private int screenHeghtInPixels;
-	
-	private BufferedImage fieldImage;
-	private BufferedImage hudImage;
-	private BufferedImage inventoryImage;
-	private BufferedImage contextMenuImage;
 	
 	private Model model;
 	
@@ -22,9 +16,6 @@ public class GraphicsModelRender implements ModelRender {
 	
 	public GraphicsModelRender(Model model) {
 		this.model = model;
-		this.fieldImage = new BufferedImage(model.getField().getWidthInPixels(), model.getField().getHeightInPixels(), BufferedImage.TYPE_INT_RGB);
-		this.hudImage = new BufferedImage(model.getHud().getWidthInPixels(), model.getHud().getHeightInPixels(), BufferedImage.TYPE_INT_RGB);
-		this.inventoryImage = new BufferedImage(model.getInventory().getWidthInPixels(), model.getInventory().getHeightInPixels(), BufferedImage.TYPE_INT_RGB);
 	}
 	
 	@Override
@@ -35,30 +26,21 @@ public class GraphicsModelRender implements ModelRender {
 		this.screenWidthInPixels = screenWidthInPixels;
 		this.screenHeghtInPixels = screenHeghtInPixels;
 		
-		renderField(model, fieldImage.getGraphics());
-		renderHud(model, hudImage.getGraphics());
+		renderField(model);
+		renderHud(model);
 		
 		if (model.getInventory().isOpend()) {
-			renderInventory(model, inventoryImage.getGraphics());
+			renderInventory(model);
 		}
 		
-		renderContextMenu(model, null);
+		renderContextMenu(model);
 		
 	}
 
-	private void renderField(Model model, Graphics graphicContext) {
+	private void renderField(Model model) {
 		
 		int cellWidth = model.getField().getCell(0, 0).getRepresentation().getImage().getWidth(null);
 		int cellHeight = model.getField().getCell(0, 0).getRepresentation().getImage().getHeight(null);
-		
-		GameField field = model.getField(); 
-		
-		for (int i = 0; i < model.getField().getHeightInCells(); i++) {
-			for (int j = 0; j < model.getField().getWigthInCells(); j++) {
-				field.getCell(i, j).render(graphicContext, j * cellWidth, i * cellHeight);
-				
-			}
-		}
 		
 		// field centred camera: begin
 //		int widthScaleFactor = (screenWidthInPixels - model.getField().getWidthInPixels()) / 2;
@@ -76,30 +58,36 @@ public class GraphicsModelRender implements ModelRender {
 		
 		int widthScaleFactor = screenCenterX - playerX;
 		int heightScaleFactor = screenCenterY - playerY;
-		
-		screenGraphicContext.drawImage(fieldImage, widthScaleFactor, heightScaleFactor, null);
 		// player centred camera: end
+		
+		GameField field = model.getField(); 
+		
+		for (int i = 0; i < model.getField().getHeightInCells(); i++) {
+			for (int j = 0; j < model.getField().getWigthInCells(); j++) {
+				field.getCell(i, j).render(screenGraphicContext, widthScaleFactor + j * cellWidth, heightScaleFactor + i * cellHeight);
+				
+			}
+		}
+
 	}
 
-	private void renderHud(Model model, Graphics graphicContext) {	
-		graphicContext.drawImage(model.getHud().getImg(), 0, 0, null);
+	private void renderHud(Model model) {	
 		
 		int hudX = (this.screenWidthInPixels - model.getHud().getWidthInPixels()) / 2; // center on horizontal
 		int hudY = this.screenHeghtInPixels - model.getHud().getHeightInPixels();      // down on vertical
-		screenGraphicContext.drawImage(hudImage, hudX, hudY, null);
+		screenGraphicContext.drawImage(model.getHud().getImg(), hudX, hudY, null);
 	}
 
-	private void renderInventory(Model model, Graphics graphicContext) {
-		graphicContext.drawImage(model.getInventory().getImg(), 0, 0, null);
+	private void renderInventory(Model model) {
 		
 		int widthScaleFactor = (screenWidthInPixels - model.getInventory().getWidthInPixels()) / 2;
 		int heightScaleFactor = (screenHeghtInPixels - model.getInventory().getHeightInPixels()) / 2;
 		
-		screenGraphicContext.drawImage(inventoryImage, widthScaleFactor, heightScaleFactor, null);
+		screenGraphicContext.drawImage(model.getInventory().getImg(), widthScaleFactor, heightScaleFactor, null);
 		
 	}
 
-	private void renderContextMenu(Model model, Graphics graphicContext) {
+	private void renderContextMenu(Model model) {
 		// TODO Auto-generated method stub
 		
 	}
