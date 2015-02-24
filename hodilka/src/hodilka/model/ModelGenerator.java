@@ -1,5 +1,7 @@
 package hodilka.model;
 
+import hodilka.ImageConstants;
+
 import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
@@ -11,7 +13,7 @@ public class ModelGenerator {
 	public static Image sellSelection;
 	static {
 		try {
-			sellSelection = ImageIO.read(ModelGenerator.class.getResourceAsStream("/cellSelection.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+			sellSelection = ImageIO.read(ModelGenerator.class.getResourceAsStream("/cellSelection.png")).getScaledInstance(ImageConstants.IMAGE_WH, ImageConstants.IMAGE_WH, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,7 +41,7 @@ public class ModelGenerator {
 		GameObject playerGameObject = new GameObject();
 		playerGameObject.getRepresentation().setColor(Color.RED);
 		try {
-			playerGameObject.getRepresentation().setImage(ImageIO.read(ModelGenerator.class.getResourceAsStream("/player.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+			playerGameObject.getRepresentation().setImage(ImageIO.read(ModelGenerator.class.getResourceAsStream("/player.png")).getScaledInstance(ImageConstants.IMAGE_WH, ImageConstants.IMAGE_WH, Image.SCALE_SMOOTH));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +59,7 @@ public class ModelGenerator {
 		
 		Image groundImage = null;
 		try {
-			groundImage = ImageIO.read(ModelGenerator.class.getResourceAsStream("/ground.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+			groundImage = ImageIO.read(ModelGenerator.class.getResourceAsStream("/ground.png")).getScaledInstance(ImageConstants.IMAGE_WH, ImageConstants.IMAGE_WH, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,8 +78,8 @@ public class ModelGenerator {
 			}
 		}
 		
-		field.setHeightInPixels(heightInCells * 40);
-		field.setWidthInPixels(widthInCells * 40);
+		field.setHeightInPixels(heightInCells * ImageConstants.IMAGE_WH);
+		field.setWidthInPixels(widthInCells * ImageConstants.IMAGE_WH);
 		
 		return field;
 	}

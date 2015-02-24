@@ -1,5 +1,7 @@
 package hodilka.model;
 
+import hodilka.ImageConstants;
+
 public class Model {
 	
 	private MainMenu menu;
@@ -56,8 +58,8 @@ public class Model {
 		// field centred camera: end
 		
 		// player centred camera: begin
-		int playerX = player.getGameObject().getLocationCell().getJ() * 40 + 20;
-		int playerY = player.getGameObject().getLocationCell().getI() * 40 + 20;
+		int playerX = player.getGameObject().getLocationCell().getJ() * ImageConstants.IMAGE_WH + ImageConstants.IMAGE_WH / 2;
+		int playerY = player.getGameObject().getLocationCell().getI() * ImageConstants.IMAGE_WH + ImageConstants.IMAGE_WH / 2;
 
 		int screenCenterX = screenWidthInPixels / 2;
 		int screenCenterY = screenHeightInPixels / 2;
@@ -69,8 +71,8 @@ public class Model {
 		
 		// if mouse over the field
 		if (mouseXOffset > 0 && mouseYOffset > 0) {
-			int j = mouseXOffset / 40;
-			int i = mouseYOffset / 40;
+			int j = mouseXOffset / ImageConstants.IMAGE_WH;
+			int i = mouseYOffset / ImageConstants.IMAGE_WH;
 			field.selectCell(i, j);
 		} else {
 			field.deselect();
