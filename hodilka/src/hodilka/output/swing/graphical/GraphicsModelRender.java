@@ -42,13 +42,6 @@ public class GraphicsModelRender implements ModelRender {
 		int cellWidth = model.getField().getCell(0, 0).getRepresentation().getImage().getWidth(null);
 		int cellHeight = model.getField().getCell(0, 0).getRepresentation().getImage().getHeight(null);
 		
-		// field centered camera: begin
-//		int widthScaleFactor = (screenWidthInPixels - model.getField().getWidthInPixels()) / 2;
-//		int heightScaleFactor = (screenHeghtInPixels - model.getField().getHeightInPixels()) / 2;
-//		
-//		screenGraphicContext.drawImage(fieldImage, widthScaleFactor, heightScaleFactor, null);
-		// field centered camera: end
-		
 		// player centered camera: begin
 		int playerX = model.getPlayer().getGameObject().getLocationCell().getJ() * cellWidth + cellWidth / 2;
 		int playerY = model.getPlayer().getGameObject().getLocationCell().getI() * cellHeight + cellHeight / 2;
@@ -71,7 +64,7 @@ public class GraphicsModelRender implements ModelRender {
 			fromJ--;
 		
 		int toJ = model.getField().getWigthInCells();
-		if (widthScaleFactor > 0 && model.getField().getWidthInPixels() + widthScaleFactor > screenWidthInPixels) 
+		if (model.getField().getWidthInPixels() + widthScaleFactor > screenWidthInPixels) 
 			toJ = (screenWidthInPixels - widthScaleFactor) / cellWidth;
 		if (toJ < model.getField().getWigthInCells())
 			toJ++;
@@ -85,11 +78,10 @@ public class GraphicsModelRender implements ModelRender {
 			fromI--;
 		
 		int toI = model.getField().getHeightInCells();
-		if (heightScaleFactor > 0 && model.getField().getHeightInPixels() + heightScaleFactor > screenHeightInPixels) 
+		if (model.getField().getHeightInPixels() + heightScaleFactor > screenHeightInPixels) 
 			toI = (screenHeightInPixels - heightScaleFactor) / cellHeight;
 		if (toI < model.getField().getHeightInCells())
 			toI++;
-		
 		
 //		for (int i = 0; i < model.getField().getHeightInCells(); i++) {
 //		for (int j = 0; j < model.getField().getWigthInCells(); j++) {
@@ -100,7 +92,6 @@ public class GraphicsModelRender implements ModelRender {
 				field.getCell(i, j).render(screenGraphicContext, widthScaleFactor + j * cellWidth, heightScaleFactor + i * cellHeight);
 			}
 		}
-
 	}
 
 	private void renderHud(Model model) {	

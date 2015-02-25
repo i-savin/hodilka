@@ -7,7 +7,7 @@ public class ControllerStateInitial implements ControllerState {
 
 	@Override
 	public ControllerState nextState() {
-		return new ControllerStateField();
+		return new ControllerStateMain();
 	}
 
 	@Override

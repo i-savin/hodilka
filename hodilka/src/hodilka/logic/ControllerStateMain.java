@@ -3,7 +3,7 @@ package hodilka.logic;
 import hodilka.input.PlayerInput;
 import hodilka.model.Model;
 
-public class ControllerStateField implements ControllerState {
+public class ControllerStateMain implements ControllerState {
 
 	private ControllerState next = this;
 	

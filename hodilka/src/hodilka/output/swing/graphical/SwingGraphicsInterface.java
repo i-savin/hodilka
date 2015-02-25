@@ -44,6 +44,9 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 			
 			SwingGraphicsInterface.this.inputSource.setWidthAndHeight(rect.width, rect.height);
 			panel.setSize(rect.width, rect.height);
+			
+			screen = SwingGraphicsInterface.this.createImage(widthInPixels, heightInPixels);
+			screenGraphics = screen.getGraphics();
 		}
 		
 		@Override public void componentMoved(ComponentEvent e) { }
@@ -137,7 +140,7 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 		
 		pack();
 		// TODO need to make image of maximum size
-		screen = this.createImage(widthInPixels * 3, heightInPixels * 3); // does not work, returns null
+		screen = this.createImage(widthInPixels, heightInPixels);
 		screenGraphics = screen.getGraphics();
 		
 		this.setSize(widthInPixels, heightInPixels);

@@ -48,9 +48,9 @@ public class Application {
 			// get input data from player
 			playerInput = input.getUserInputNoWait();
 			
-			if (!playerInput.isEmpty()) {
-				System.out.println(playerInput);
-			}
+//			if (!playerInput.isEmpty()) {
+//				System.out.println(playerInput);
+//			}
 
 			// change model state and state of game objects if needed
 			logic.processInput(playerInput);

@@ -20,7 +20,7 @@ public class ControllerStateInventory implements ControllerState {
 			if (playerInput.getKeyCode() == 73) { // i
 				model.getInventory().setOpend(false);
 				// TODO need to cache all states
-				next = new ControllerStateField();
+				next = new ControllerStateMain();
 			}
 			
 		}

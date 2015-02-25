@@ -70,7 +70,7 @@ public class Model {
 		// player centred camera: end
 		
 		// if mouse over the field
-		if (mouseXOffset > 0 && mouseYOffset > 0) {
+		if (mouseXOffset > 0 && mouseYOffset > 0 && mouseXOffset <= field.getWidthInPixels() && mouseYOffset <= field.getHeightInPixels()) {
 			int j = mouseXOffset / ImageConstants.IMAGE_WH;
 			int i = mouseYOffset / ImageConstants.IMAGE_WH;
 			field.selectCell(i, j);
