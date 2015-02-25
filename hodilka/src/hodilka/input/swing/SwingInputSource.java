@@ -11,36 +11,36 @@ import java.awt.event.MouseMotionListener;
 
 public class SwingInputSource implements InputSource, KeyListener, MouseListener, MouseMotionListener {
 
-	private final PlayerInput pki = new PlayerInput();
+	private final PlayerInput playerInput = new PlayerInput();
 
 	@Override
 	public PlayerInput getInput() {
-		return pki;
+		return playerInput;
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		pki.setKeyCode(e.getKeyCode());
-		pki.setModifiers(e.getModifiers());
-		pki.setKeyPressed(true);
+		playerInput.setKeyCode(e.getKeyCode());
+		playerInput.setModifiers(e.getModifiers());
+		playerInput.setKeyPressed(true);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		pki.setMouseX(e.getPoint().x);
-		pki.setMouseY(e.getPoint().y);
-		pki.setMouseMoved(true);
+		playerInput.setMouseX(e.getPoint().x);
+		playerInput.setMouseY(e.getPoint().y);
+		playerInput.setMouseMoved(true);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		pki.setButton(e.getButton());
-		pki.setMouseButtonChanged(true);
+		playerInput.setButton(e.getButton());
+		playerInput.setMouseButtonChanged(true);
 	}
 	
 	public void setWidthAndHeight(int width, int height) {
-		pki.setActualWidthInPixels(width);
-		pki.setActualHeightInPixels(height);
+		playerInput.setActualWidthInPixels(width);
+		playerInput.setActualHeightInPixels(height);
 	}
 	
 	public void keyTyped(KeyEvent e)		{ /* no implementation */ }
