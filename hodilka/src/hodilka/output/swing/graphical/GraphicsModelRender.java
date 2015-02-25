@@ -8,7 +8,7 @@ import java.awt.Graphics;
 public class GraphicsModelRender implements ModelRender {
 
 	private int screenWidthInPixels;
-	private int screenHeghtInPixels;
+	private int screenHeightInPixels;
 	
 	private Model model;
 	
@@ -24,7 +24,7 @@ public class GraphicsModelRender implements ModelRender {
 		this.screenGraphicContext = screenGraphicContext;
 		
 		this.screenWidthInPixels = screenWidthInPixels;
-		this.screenHeghtInPixels = screenHeghtInPixels;
+		this.screenHeightInPixels = screenHeghtInPixels;
 		
 		renderField(model);
 		renderHud(model);
@@ -42,30 +42,62 @@ public class GraphicsModelRender implements ModelRender {
 		int cellWidth = model.getField().getCell(0, 0).getRepresentation().getImage().getWidth(null);
 		int cellHeight = model.getField().getCell(0, 0).getRepresentation().getImage().getHeight(null);
 		
-		// field centred camera: begin
+		// field centered camera: begin
 //		int widthScaleFactor = (screenWidthInPixels - model.getField().getWidthInPixels()) / 2;
 //		int heightScaleFactor = (screenHeghtInPixels - model.getField().getHeightInPixels()) / 2;
 //		
 //		screenGraphicContext.drawImage(fieldImage, widthScaleFactor, heightScaleFactor, null);
-		// field centred camera: end
+		// field centered camera: end
 		
-		// player centred camera: begin
+		// player centered camera: begin
 		int playerX = model.getPlayer().getGameObject().getLocationCell().getJ() * cellWidth + cellWidth / 2;
 		int playerY = model.getPlayer().getGameObject().getLocationCell().getI() * cellHeight + cellHeight / 2;
 
 		int screenCenterX = screenWidthInPixels / 2;
-		int screenCenterY = screenHeghtInPixels / 2;
+		int screenCenterY = screenHeightInPixels / 2;
 		
 		int widthScaleFactor = screenCenterX - playerX;
 		int heightScaleFactor = screenCenterY - playerY;
-		// player centred camera: end
+		// player centered camera: end
 		
 		GameField field = model.getField(); 
 		
-		for (int i = 0; i < model.getField().getHeightInCells(); i++) {
-			for (int j = 0; j < model.getField().getWigthInCells(); j++) {
+		// calculate coordinates bounds of visible tiles
+		int fromJ = 0;
+		if (widthScaleFactor < 0)
+			fromJ = (-widthScaleFactor) / cellWidth;
+		
+		if (fromJ > 0 )
+			fromJ--;
+		
+		int toJ = model.getField().getWigthInCells();
+		if (widthScaleFactor > 0 && model.getField().getWidthInPixels() + widthScaleFactor > screenWidthInPixels) 
+			toJ = (screenWidthInPixels - widthScaleFactor) / cellWidth;
+		if (toJ < model.getField().getWigthInCells())
+			toJ++;
+		
+		
+		int fromI = 0;
+		if (heightScaleFactor < 0)
+			fromI = (-heightScaleFactor) / cellHeight;
+		
+		if (fromI > 0 )
+			fromI--;
+		
+		int toI = model.getField().getHeightInCells();
+		if (heightScaleFactor > 0 && model.getField().getHeightInPixels() + heightScaleFactor > screenHeightInPixels) 
+			toI = (screenHeightInPixels - heightScaleFactor) / cellHeight;
+		if (toI < model.getField().getHeightInCells())
+			toI++;
+		
+		
+//		for (int i = 0; i < model.getField().getHeightInCells(); i++) {
+//		for (int j = 0; j < model.getField().getWigthInCells(); j++) {
+		
+		// walk throw visible tiles only
+		for (int i = fromI; i < toI; i++) {
+			for (int j = fromJ; j < toJ; j++) {
 				field.getCell(i, j).render(screenGraphicContext, widthScaleFactor + j * cellWidth, heightScaleFactor + i * cellHeight);
-				
 			}
 		}
 
@@ -74,14 +106,14 @@ public class GraphicsModelRender implements ModelRender {
 	private void renderHud(Model model) {	
 		
 		int hudX = (this.screenWidthInPixels - model.getHud().getWidthInPixels()) / 2; // center on horizontal
-		int hudY = this.screenHeghtInPixels - model.getHud().getHeightInPixels();      // down on vertical
+		int hudY = this.screenHeightInPixels - model.getHud().getHeightInPixels();      // down on vertical
 		screenGraphicContext.drawImage(model.getHud().getImg(), hudX, hudY, null);
 	}
 
 	private void renderInventory(Model model) {
 		
 		int widthScaleFactor = (screenWidthInPixels - model.getInventory().getWidthInPixels()) / 2;
-		int heightScaleFactor = (screenHeghtInPixels - model.getInventory().getHeightInPixels()) / 2;
+		int heightScaleFactor = (screenHeightInPixels - model.getInventory().getHeightInPixels()) / 2;
 		
 		screenGraphicContext.drawImage(model.getInventory().getImg(), widthScaleFactor, heightScaleFactor, null);
 		

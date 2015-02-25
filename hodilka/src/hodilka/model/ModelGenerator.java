@@ -3,7 +3,9 @@ package hodilka.model;
 import hodilka.ImageConstants;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -41,7 +43,19 @@ public class ModelGenerator {
 		GameObject playerGameObject = new GameObject();
 		playerGameObject.getRepresentation().setColor(Color.RED);
 		try {
-			playerGameObject.getRepresentation().setImage(ImageIO.read(ModelGenerator.class.getResourceAsStream("/player.png")).getScaledInstance(ImageConstants.IMAGE_WH, ImageConstants.IMAGE_WH, Image.SCALE_SMOOTH));
+			
+			Image playerIm = new BufferedImage(ImageConstants.IMAGE_WH, ImageConstants.IMAGE_WH, BufferedImage.TYPE_INT_ARGB);
+			Graphics g = playerIm.getGraphics();			
+			
+			Image playerBody = ImageIO.read(ModelGenerator.class.getResourceAsStream("/player.png")).getScaledInstance(ImageConstants.IMAGE_WH, ImageConstants.IMAGE_WH, Image.SCALE_SMOOTH);
+			Image sword = ImageIO.read(ModelGenerator.class.getResourceAsStream("/sword.png")).getScaledInstance(ImageConstants.IMAGE_WH, ImageConstants.IMAGE_WH, Image.SCALE_SMOOTH);
+			Image shild = ImageIO.read(ModelGenerator.class.getResourceAsStream("/shild.png")).getScaledInstance(ImageConstants.IMAGE_WH, ImageConstants.IMAGE_WH, Image.SCALE_SMOOTH);
+			
+			g.drawImage(playerBody, 0, 0, null);
+			g.drawImage(sword, 0, 0, null);
+			g.drawImage(shild, 0, 0, null);
+			
+			playerGameObject.getRepresentation().setImage(playerIm);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
