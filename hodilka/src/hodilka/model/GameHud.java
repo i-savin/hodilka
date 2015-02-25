@@ -31,5 +31,10 @@ public class GameHud {
 	public void setHeightInPixels(int heightInPixels) {
 		this.heightInPixels = heightInPixels;
 	}
+
+	// Is Mouse over the hud (mouseXRelative, mouseYRelative) - mouse location relative to hud upper left corner
+	public boolean isMouseOver(int mouseXRelative, int mouseYRelative) {
+		return 0 <= mouseXRelative && mouseXRelative <= widthInPixels && 0 <= mouseYRelative && mouseYRelative <= heightInPixels;
+	}
 	
 }

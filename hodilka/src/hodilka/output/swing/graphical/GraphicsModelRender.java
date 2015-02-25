@@ -1,5 +1,6 @@
 package hodilka.output.swing.graphical;
 
+import hodilka.ImageConstants;
 import hodilka.model.GameField;
 import hodilka.model.Model;
 
@@ -39,8 +40,8 @@ public class GraphicsModelRender implements ModelRender {
 
 	private void renderField(Model model) {
 		
-		int cellWidth = model.getField().getCell(0, 0).getRepresentation().getImage().getWidth(null);
-		int cellHeight = model.getField().getCell(0, 0).getRepresentation().getImage().getHeight(null);
+		int cellWidth = ImageConstants.IMAGE_WH;
+		int cellHeight = ImageConstants.IMAGE_WH;
 		
 		// player centered camera: begin
 		int playerX = model.getPlayer().getGameObject().getLocationCell().getJ() * cellWidth + cellWidth / 2;
@@ -49,47 +50,44 @@ public class GraphicsModelRender implements ModelRender {
 		int screenCenterX = screenWidthInPixels / 2;
 		int screenCenterY = screenHeightInPixels / 2;
 		
-		int widthScaleFactor = screenCenterX - playerX;
-		int heightScaleFactor = screenCenterY - playerY;
+		int xFieldOffset = screenCenterX - playerX;
+		int yFieldOffset = screenCenterY - playerY;
 		// player centered camera: end
+		
+		// Point (xFieldOffset, yFieldOffset) is offset of upper left field cell relatively to Point(0,0) of application window bound rect 
 		
 		GameField field = model.getField(); 
 		
 		// calculate coordinates bounds of visible tiles
 		int fromJ = 0;
-		if (widthScaleFactor < 0)
-			fromJ = (-widthScaleFactor) / cellWidth;
-		
+		if (xFieldOffset < 0)
+			fromJ = (-xFieldOffset) / cellWidth;
 		if (fromJ > 0 )
 			fromJ--;
 		
 		int toJ = model.getField().getWigthInCells();
-		if (model.getField().getWidthInPixels() + widthScaleFactor > screenWidthInPixels) 
-			toJ = (screenWidthInPixels - widthScaleFactor) / cellWidth;
+		if (model.getField().getWidthInPixels() + xFieldOffset > screenWidthInPixels) 
+			toJ = (screenWidthInPixels - xFieldOffset) / cellWidth;
 		if (toJ < model.getField().getWigthInCells())
 			toJ++;
 		
 		
 		int fromI = 0;
-		if (heightScaleFactor < 0)
-			fromI = (-heightScaleFactor) / cellHeight;
-		
+		if (yFieldOffset < 0)
+			fromI = (-yFieldOffset) / cellHeight;
 		if (fromI > 0 )
 			fromI--;
 		
 		int toI = model.getField().getHeightInCells();
-		if (model.getField().getHeightInPixels() + heightScaleFactor > screenHeightInPixels) 
-			toI = (screenHeightInPixels - heightScaleFactor) / cellHeight;
+		if (model.getField().getHeightInPixels() + yFieldOffset > screenHeightInPixels) 
+			toI = (screenHeightInPixels - yFieldOffset) / cellHeight;
 		if (toI < model.getField().getHeightInCells())
 			toI++;
 		
-//		for (int i = 0; i < model.getField().getHeightInCells(); i++) {
-//		for (int j = 0; j < model.getField().getWigthInCells(); j++) {
-		
 		// walk throw visible tiles only
-		for (int i = fromI; i < toI; i++) {
-			for (int j = fromJ; j < toJ; j++) {
-				field.getCell(i, j).render(screenGraphicContext, widthScaleFactor + j * cellWidth, heightScaleFactor + i * cellHeight);
+		for (int yIndexI = fromI; yIndexI < toI; yIndexI++) {
+			for (int xIndexJ = fromJ; xIndexJ < toJ; xIndexJ++) {
+				field.getCell(yIndexI, xIndexJ).render(screenGraphicContext, xFieldOffset + xIndexJ * cellWidth, yFieldOffset + yIndexI * cellHeight);
 			}
 		}
 	}
@@ -103,10 +101,10 @@ public class GraphicsModelRender implements ModelRender {
 
 	private void renderInventory(Model model) {
 		
-		int widthScaleFactor = (screenWidthInPixels - model.getInventory().getWidthInPixels()) / 2;
-		int heightScaleFactor = (screenHeightInPixels - model.getInventory().getHeightInPixels()) / 2;
+		int xOffset = (screenWidthInPixels - model.getInventory().getWidthInPixels()) / 2;
+		int yOffset = (screenHeightInPixels - model.getInventory().getHeightInPixels()) / 2;
 		
-		screenGraphicContext.drawImage(model.getInventory().getImg(), widthScaleFactor, heightScaleFactor, null);
+		screenGraphicContext.drawImage(model.getInventory().getImg(), xOffset, yOffset, null);
 		
 	}
 

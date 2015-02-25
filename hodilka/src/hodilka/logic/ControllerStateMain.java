@@ -56,7 +56,7 @@ public class ControllerStateMain implements ControllerState {
 //					playerInput.getActualWidthInPixels(), playerInput.getActualHeightInPixels());
 		}
 		
-		model.checkSelection(playerInput.getMouseX(), playerInput.getMouseY(),
+		model.checkCellSelection(playerInput.getMouseX(), playerInput.getMouseY(),
 				playerInput.getActualWidthInPixels(), playerInput.getActualHeightInPixels());
 		
 		if (playerInput.isMouseButtonChanged()) {

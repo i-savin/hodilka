@@ -62,7 +62,7 @@ public class GameField {
 		}
 	}
 
-	public void deselect() {
+	public void deselectCell() {
 		if (selectedCell != null) {
 			selectedCell.setSelected(false);
 			selectedCell = null;
@@ -136,6 +136,11 @@ public class GameField {
 
 	public void setHeightInPixels(int heightInPixels) {
 		this.heightInPixels = heightInPixels;
+	}
+
+	/** If mouse is over the field or not (true - over, false - some where else). mouseXRelative, mouseYRelative relative to field's (0,0) upper left point */
+	public boolean isMouseOver(int mouseXRelative, int mouseYRelative) {
+		return mouseXRelative > 0 && mouseYRelative > 0 && mouseXRelative <= widthInPixels && mouseYRelative <= heightInPixels;
 	}
 	
 }

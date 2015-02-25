@@ -39,13 +39,13 @@ public class SwingGraphicsInterface extends JFrame implements OutputInterface {
 			
 			Rectangle rect = SwingGraphicsInterface.this.getBounds();
 			
-			SwingGraphicsInterface.this.widthInPixels = rect.width;
-			SwingGraphicsInterface.this.heightInPixels = rect.height;
+			widthInPixels = rect.width;
+			heightInPixels = rect.height;
 			
-			SwingGraphicsInterface.this.inputSource.setWidthAndHeight(rect.width, rect.height);
-			panel.setSize(rect.width, rect.height);
+			inputSource.setWidthAndHeight(widthInPixels, heightInPixels);
+			panel.setSize(widthInPixels, heightInPixels);
 			
-			screen = SwingGraphicsInterface.this.createImage(widthInPixels, heightInPixels);
+			screen = createImage(widthInPixels, heightInPixels);
 			screenGraphics = screen.getGraphics();
 		}
 		

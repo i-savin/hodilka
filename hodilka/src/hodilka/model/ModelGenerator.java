@@ -12,6 +12,10 @@ import javax.imageio.ImageIO;
 
 public class ModelGenerator {
 
+	// FIXME: hardcoded
+	private int fieldHeightInCells = 20;
+	private int fieldWidthInCells = 20;
+	
 	public static Image sellSelection;
 	static {
 		try {
@@ -67,10 +71,6 @@ public class ModelGenerator {
 	}
 
 	private GameField generateGameField() {
-		// FIXME: hardcoded
-		int heightInCells = 20;
-		int widthInCells = 20;
-		
 		Image groundImage = null;
 		try {
 			groundImage = ImageIO.read(ModelGenerator.class.getResourceAsStream("/ground.png")).getScaledInstance(ImageConstants.IMAGE_WH, ImageConstants.IMAGE_WH, Image.SCALE_SMOOTH);
@@ -79,9 +79,9 @@ public class ModelGenerator {
 			e.printStackTrace();
 		}
 		
-		GameField field = new GameField(widthInCells, heightInCells);
-		for (int i = 0; i < heightInCells; i++) {
-			for (int j = 0; j < widthInCells; j++) {
+		GameField field = new GameField(fieldWidthInCells, fieldHeightInCells);
+		for (int i = 0; i < fieldHeightInCells; i++) {
+			for (int j = 0; j < fieldWidthInCells; j++) {
 				
 				GameObject ground = new GameObject();
 				ground.setDiscription("Ground");
@@ -92,8 +92,8 @@ public class ModelGenerator {
 			}
 		}
 		
-		field.setHeightInPixels(heightInCells * ImageConstants.IMAGE_WH);
-		field.setWidthInPixels(widthInCells * ImageConstants.IMAGE_WH);
+		field.setHeightInPixels(fieldHeightInCells * ImageConstants.IMAGE_WH);
+		field.setWidthInPixels(fieldWidthInCells * ImageConstants.IMAGE_WH);
 		
 		return field;
 	}
