@@ -140,9 +140,6 @@ public class FieldCell {
 		for (GameObject go: gameObjectStack ) {
 			graphicContext.drawImage(go.getRepresentation().getImage(), x, y, null);
 		}
-		if (selected) {
-			graphicContext.drawImage(ModelGenerator.sellSelection, x, y, null);
-		}
 	}
 	
 }

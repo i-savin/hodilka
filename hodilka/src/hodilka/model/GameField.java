@@ -15,6 +15,8 @@ public class GameField {
 	private int heightInPixels;
 	
 	private FieldCell selectedCell;
+
+	private GameObject cellSelectionMark;
 	
 	public GameField(int widthInCells, int heightInCells) {
 		
@@ -48,6 +50,7 @@ public class GameField {
 					cell.setRightUpCell(cells[i - 1][j + 1]);
 					cells[i - 1][j + 1].setLeftDownCell(cell);
 				}
+				
 			}
 		}
 	}
@@ -56,15 +59,18 @@ public class GameField {
 		if (areValidCoordinates(i, j)) {
 			if (selectedCell != null) {
 				selectedCell.setSelected(false);
+				selectedCell.removeGameObject(cellSelectionMark);
 			}
 			selectedCell = cells[i][j];
 			selectedCell.setSelected(true);
+			selectedCell.addGameObject(cellSelectionMark);
 		}
 	}
 
 	public void deselectCell() {
 		if (selectedCell != null) {
 			selectedCell.setSelected(false);
+			selectedCell.removeGameObject(cellSelectionMark);
 			selectedCell = null;
 		}
 	}
@@ -141,6 +147,10 @@ public class GameField {
 	/** If mouse is over the field or not (true - over, false - some where else). mouseXRelative, mouseYRelative relative to field's (0,0) upper left point */
 	public boolean isMouseOver(int mouseXRelative, int mouseYRelative) {
 		return mouseXRelative > 0 && mouseYRelative > 0 && mouseXRelative <= widthInPixels && mouseYRelative <= heightInPixels;
+	}
+
+	public void setCellSelectionMark(GameObject cellSelectionMark) {
+		this.cellSelectionMark = cellSelectionMark;
 	}
 	
 }

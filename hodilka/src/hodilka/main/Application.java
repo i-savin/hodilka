@@ -6,6 +6,7 @@ import hodilka.input.PlayerInput;
 import hodilka.model.Model;
 import hodilka.model.ModelGenerator;
 import hodilka.output.OutputSystem;
+import hodilka.resource.ResourceManager;
 
 public class Application {
 	
@@ -19,8 +20,11 @@ public class Application {
 	private long timeToWait = 20;
 
 	public Application() {
+		
+		ResourceManager resourceManager = new ResourceManager();
+		
 		// generate model
-		ModelGenerator modelGenerator = new ModelGenerator();
+		ModelGenerator modelGenerator = new ModelGenerator(resourceManager);
 		model = modelGenerator.createModel();
 		
 		// initialize input and output systems
